@@ -1,0 +1,221 @@
+<html class="dark"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#259df4",
+            "background-light": "#f5f7f8",
+            "background-dark": "#0a1118",
+            "slate-custom": "#1e293b",
+          },
+          fontFamily: {
+            "display": ["Space Grotesk", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Navbar -->
+<header class="sticky top-0 z-50 w-full border-b border-primary/20 bg-background-dark/80 backdrop-blur-md px-6 lg:px-20 py-4">
+<div class="mx-auto flex max-w-7xl items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined text-3xl">hub</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-slate-100">Telecom <span class="text-primary">AI</span></h2>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-medium text-slate-400 hover:text-primary transition-colors" href="#">Solutions</a>
+<a class="text-sm font-medium text-primary" href="#">How It Works</a>
+<a class="text-sm font-medium text-slate-400 hover:text-primary transition-colors" href="#">Benefits</a>
+<a class="text-sm font-medium text-slate-400 hover:text-primary transition-colors" href="#">Pricing</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex items-center justify-center rounded-lg bg-primary px-6 py-2 text-sm font-bold text-white transition-transform hover:scale-105">
+            Get Started
+          </button>
+<div class="h-10 w-10 rounded-full border border-primary/30 bg-primary/10 p-0.5" data-alt="User avatar placeholder with abstract blue gradient">
+<img alt="User" class="h-full w-full rounded-full" data-alt="Circular profile picture placeholder with neon blue accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjIi2kdqutF4yaxCsTlrstOrFBc2qN4FHRCg8WeywumA0C9Q4hg25cIfCrd4ZdmbRrDNdlvUYHH07HvPs_E2ntAR5rukXwooazpzjOnHcBU5gMq5x-U1w6ZztTa9vCRXMoL20pT8ZeprZAODbwep5Pox8b_Tp-W1JkaiY_Ii3ZhW9L5-0OjT0cdlcTITpY9uO71DyqFZSzAXQBZQu3_R7UIicQ20G_tcLr9yfFIRNaKmNIylu3zEMp8ESPUyfyoP40Y3vfgy47Qjs"/>
+</div>
+</div>
+</div>
+</header>
+<main class="mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 py-12 lg:px-20 lg:py-24">
+<!-- How It Works Section -->
+<section class="mb-32">
+<div class="mb-16 flex flex-col items-start gap-4">
+<span class="rounded-full bg-primary/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-primary border border-primary/20">Our Process</span>
+<h1 class="text-4xl font-bold tracking-tight text-slate-100 sm:text-5xl lg:text-6xl">
+            Streamlined <span class="text-primary">Intelligence</span>
+</h1>
+<p class="max-w-2xl text-lg text-slate-400">
+            From legacy infrastructure to autonomous operations. Our AI deployment engine transforms your network in three simple phases.
+          </p>
+</div>
+<div class="relative grid grid-cols-1 gap-12 lg:grid-cols-3">
+<!-- Connector Line (Desktop) -->
+<div class="absolute left-0 top-1/2 hidden h-0.5 w-full -translate-y-1/2 bg-gradient-to-r from-primary/5 via-primary/40 to-primary/5 lg:block"></div>
+<!-- Step 1 -->
+<div class="group relative flex flex-col items-center text-center lg:items-start lg:text-left">
+<div class="z-10 mb-8 flex h-20 w-20 items-center justify-center rounded-2xl border border-primary/30 bg-background-dark shadow-[0_0_30px_-5px_rgba(37,157,244,0.3)] group-hover:border-primary transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-primary">settings_input_component</span>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-xs font-black text-primary/40 uppercase tracking-tighter">Phase 01</span>
+<h3 class="text-2xl font-bold text-slate-100">Connect Your Business</h3>
+<p class="text-slate-400 leading-relaxed">
+                Seamlessly integrate your existing telecommunication infrastructure with our high-speed secure API gateway.
+              </p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="group relative flex flex-col items-center text-center lg:items-start lg:text-left">
+<div class="z-10 mb-8 flex h-20 w-20 items-center justify-center rounded-2xl border border-primary/30 bg-background-dark shadow-[0_0_30px_-5px_rgba(37,157,244,0.3)] group-hover:border-primary transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-primary">psychology</span>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-xs font-black text-primary/40 uppercase tracking-tighter">Phase 02</span>
+<h3 class="text-2xl font-bold text-slate-100">Deploy AI Agents</h3>
+<p class="text-slate-400 leading-relaxed">
+                Launch proprietary neural models customized for your specific network topology and customer demographics.
+              </p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="group relative flex flex-col items-center text-center lg:items-start lg:text-left">
+<div class="z-10 mb-8 flex h-20 w-20 items-center justify-center rounded-2xl border border-primary/30 bg-background-dark shadow-[0_0_30px_-5px_rgba(37,157,244,0.3)] group-hover:border-primary transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-primary">auto_mode</span>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-xs font-black text-primary/40 uppercase tracking-tighter">Phase 03</span>
+<h3 class="text-2xl font-bold text-slate-100">Automate Everything</h3>
+<p class="text-slate-400 leading-relaxed">
+                Sit back as autonomous agents optimize signal distribution, handle tier-1 support, and predict maintenance needs.
+              </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Benefits Section -->
+<section class="rounded-3xl border border-primary/10 bg-primary/5 p-8 lg:p-16">
+<div class="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+<div class="flex flex-col gap-8">
+<div class="flex flex-col gap-4">
+<span class="text-sm font-bold text-primary">Competitive Edge</span>
+<h2 class="text-4xl font-bold tracking-tight text-slate-100 sm:text-5xl">
+                Why Industry Leaders Choose <span class="text-primary">Telecom AI</span>
+</h2>
+<p class="text-slate-400">
+                Our platform isn't just a tool; it's a structural upgrade for the digital age. We provide the intelligence layer that modern networks demand.
+              </p>
+</div>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<div class="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-100">24/7 Autonomous Operations</h4>
+<p class="text-sm text-slate-400">AI agents that never sleep, ensuring consistent network performance and instant customer support.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-100">45% Reduction in OpEx</h4>
+<p class="text-sm text-slate-400">Drastically lower your operational overhead through intelligent automation and predictive maintenance.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-100">Hyper-Scale Ready</h4>
+<p class="text-sm text-slate-400">Whether you serve thousands or millions, our AI architecture scales elastically with your demand.</p>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="rounded-lg bg-primary px-8 py-3 font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+                Book a Demo
+              </button>
+<button class="rounded-lg border border-primary/30 bg-transparent px-8 py-3 font-bold text-primary hover:bg-primary/10 transition-all">
+                Read Whitepaper
+              </button>
+</div>
+</div>
+<div class="relative grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-4">
+<div class="rounded-2xl border border-primary/20 bg-background-dark p-6 shadow-xl">
+<span class="material-symbols-outlined mb-4 text-3xl text-primary">shield</span>
+<h5 class="mb-2 font-bold text-slate-100">Enterprise Security</h5>
+<p class="text-xs text-slate-400 leading-relaxed">End-to-end encryption for all neural data flows and customer privacy.</p>
+</div>
+<div class="rounded-2xl border border-primary/20 bg-background-dark p-6 shadow-xl">
+<span class="material-symbols-outlined mb-4 text-3xl text-primary">query_stats</span>
+<h5 class="mb-2 font-bold text-slate-100">Real-time Insights</h5>
+<p class="text-xs text-slate-400 leading-relaxed">Live dashboards visualizing every node interaction and agent performance.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 pt-8">
+<div class="rounded-2xl border border-primary/20 bg-background-dark p-6 shadow-xl">
+<span class="material-symbols-outlined mb-4 text-3xl text-primary">speed</span>
+<h5 class="mb-2 font-bold text-slate-100">Low Latency</h5>
+<p class="text-xs text-slate-400 leading-relaxed">Edge-computing integration for sub-millisecond AI decision making.</p>
+</div>
+<div class="rounded-2xl border border-primary/20 bg-background-dark p-6 shadow-xl">
+<span class="material-symbols-outlined mb-4 text-3xl text-primary">terminal</span>
+<h5 class="mb-2 font-bold text-slate-100">Developer First</h5>
+<p class="text-xs text-slate-400 leading-relaxed">Comprehensive SDKs and documentation for rapid internal deployment.</p>
+</div>
+</div>
+<!-- Glow Background Effect -->
+<div class="absolute -z-10 h-full w-full rounded-full bg-primary/10 blur-[100px] top-0 left-0"></div>
+</div>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="mt-32 text-center py-20 relative overflow-hidden rounded-3xl bg-slate-custom">
+<div class="absolute inset-0 opacity-10" data-alt="Subtle neon blue grid dot pattern background" style="background-image: radial-gradient(circle at 2px 2px, #259df4 1px, transparent 0); background-size: 24px 24px;"></div>
+<div class="relative z-10 mx-auto max-w-2xl px-6">
+<h2 class="text-3xl font-bold text-slate-100 sm:text-4xl mb-6">Ready to transform your network?</h2>
+<p class="text-slate-300 mb-10 text-lg">Join 500+ telecom companies already using our AI agents to automate their operations.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<button class="rounded-lg bg-primary px-10 py-4 font-bold text-white transition-all hover:scale-105">Get Started Free</button>
+<button class="rounded-lg border border-slate-500 px-10 py-4 font-bold text-slate-100 hover:bg-slate-100/10 transition-all">Talk to Sales</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="mt-auto border-t border-primary/10 bg-background-dark py-12 px-6 lg:px-20">
+<div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">hub</span>
+<span class="font-bold text-slate-100 tracking-tight">Telecom AI</span>
+</div>
+<p class="text-sm text-slate-500">© 2024 Telecom AI Inc. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-slate-500 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
