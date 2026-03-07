@@ -141,22 +141,8 @@ function initFormValidation() {
                 submitButton.disabled = true;
             }
             
-            // Simulate form submission (replace with actual API call)
-            setTimeout(() => {
-                console.log('Form submitted:', Object.fromEntries(formData));
-                
-                // Show success message
-                showNotification('Thank you! We\'ll get back to you soon.', 'success');
-                
-                // Reset form
-                form.reset();
-                
-                // Remove loading state
-                if (submitButton) {
-                    submitButton.classList.remove('loading');
-                    submitButton.disabled = false;
-                }
-            }, 1500);
+            // Submit form (Netlify will handle it)
+            form.submit();
         });
     });
 }
