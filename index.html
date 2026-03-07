@@ -163,9 +163,9 @@
         .dropdown { position: relative; }
         .dropdown-menu {
             position: absolute;
-            top: calc(100% + 12px);
+            top: 100%;
             left: 50%;
-            transform: translateX(-50%) translateY(8px);
+            transform: translateX(-50%) translateY(0);
             min-width: 260px;
             background: #111b2e;
             border: 1px solid rgba(255,255,255,0.08);
@@ -180,15 +180,13 @@
         .dropdown-menu::before {
             content: '';
             position: absolute;
-            top: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-bottom: 8px solid rgba(255,255,255,0.08);
+            top: -16px;
+            left: 0;
+            right: 0;
+            height: 16px;
+            background: transparent;
         }
-        .dropdown:hover .dropdown-menu,
-        .dropdown.open .dropdown-menu {
+        .dropdown:hover .dropdown-menu {
             opacity: 1;
             pointer-events: all;
             transform: translateX(-50%) translateY(0);
@@ -244,8 +242,8 @@
                     <a class="nav-link text-sm font-medium text-slate-400 hover:text-white transition-colors" href="index.html">Home</a>
                     
                     <!-- Solutions Dropdown -->
-                    <div class="dropdown">
-                        <button class="nav-link text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+                    <div class="dropdown" style="padding-bottom:12px; margin-bottom:-12px;">
+                        <button class="nav-link py-2 text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-1">
                             Solutions
                             <span class="material-symbols-outlined text-sm transition-transform dropdown-arrow">expand_more</span>
                         </button>
