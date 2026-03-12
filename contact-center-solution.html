@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="SIP-VoiceFlow Contact Center — Omnichannel cloud contact center with voice, SMS, email, chat, and real-time analytics on a single platform."/>
+    <meta name="keywords" content="cloud contact center, omnichannel, call center software, customer support platform, CCaaS"/>
+    <title>Contact Center Solution — SIP-VoiceFlow</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0ea5e9",
+                        "primary-dark": "#0284c7",
+                        "accent": "#22d3ee",
+                        "accent-green": "#10b981",
+                        "surface": "#0c1222",
+                        "surface-light": "#111b2e",
+                        "surface-card": "#152038",
+                    },
+                    fontFamily: {
+                        "display": ["Outfit", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background: #0c1222; color: #e2e8f0; overflow-x: hidden; }
+
+        .grid-pattern {
+            background-image:
+                linear-gradient(rgba(14,165,233,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14,165,233,0.04) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.05); }
+            66% { transform: translate(-20px, 15px) scale(0.95); }
+        }
+
+        .hero-enter { opacity: 0; transform: translateY(32px); animation: heroIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .hero-enter-1 { animation-delay: 0.1s; }
+        .hero-enter-2 { animation-delay: 0.25s; }
+        .hero-enter-3 { animation-delay: 0.4s; }
+        .hero-enter-4 { animation-delay: 0.55s; }
+        @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
+
+        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+
+        .btn-glow {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-glow::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #0ea5e9, #22d3ee, #10b981);
+            z-index: -1;
+            opacity: 0;
+            filter: blur(12px);
+            transition: opacity 0.3s;
+        }
+        .btn-glow:hover::after { opacity: 0.6; }
+        .btn-glow:hover { transform: translateY(-2px); }
+        .btn-glow:active { transform: translateY(0); }
+
+        .card-lift {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-lift:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px -15px rgba(14,165,233,0.2);
+            border-color: rgba(14,165,233,0.4);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0c1222; }
+        ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+
+        .nav-link.active { color: #0ea5e9 !important; }
+        .nav-link.active::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:2px; background: linear-gradient(90deg,#0ea5e9,#22d3ee); border-radius: 1px; }
+        .nav-link { position: relative; }
+
+        html { scroll-behavior: smooth; }
+
+        .mobile-menu { transition: opacity 0.3s; }
+        .mobile-menu.hidden { opacity: 0; pointer-events: none; }
+        .mobile-menu.visible { opacity: 1; pointer-events: all; }
+
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 260px;
+            background: #111b2e;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 20px 60px -15px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -16px; left: 0; right: 0;
+            height: 16px;
+            background: transparent;
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+        .dropdown-item:hover { background: rgba(14,165,233,0.1); }
+        .dropdown-icon {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .mobile-solutions-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .mobile-solutions-list.open { max-height: 300px; }
+
+        .live-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; position: relative; }
+        .live-dot::after { content:''; position:absolute; inset:-3px; border-radius:50%; border:2px solid rgba(16,185,129,0.4); animation: ping 1.5s cubic-bezier(0,0,0.2,1) infinite; }
+        @keyframes ping { 75%,100%{transform:scale(2);opacity:0} }
+
+        /* Stat bar */
+        .stat-bar { height: 100%; border-radius: 3px 3px 0 0; transform-origin: bottom; animation: growBar 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; transform: scaleY(0); }
+        @keyframes growBar { to { transform: scaleY(1); } }
+
+        /* Channel badge */
+        .channel-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="relative min-h-screen flex flex-col">
+
+        <!-- ══════════ HEADER ══════════ -->
+        <header class="fixed top-0 z-50 w-full border-b border-white/5 bg-surface/70 backdrop-blur-xl">
+            <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/20 transition-transform group-hover:scale-110">
+                        <span class="material-symbols-outlined text-white text-xl" style="font-variation-settings:'FILL' 1">cell_tower</span>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-white">SIP<span class="text-primary">-VoiceFlow</span></span>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-8">
+                    <a class="nav-link text-sm font-medium text-slate-400 hover:text-white transition-colors" href="index.html">Home</a>
+                    <div class="dropdown" style="padding-bottom:12px; margin-bottom:-12px;">
+                        <button class="nav-link active py-2 text-sm font-medium text-primary flex items-center gap-1">
+                            Solutions
+                            <span class="material-symbols-outlined text-sm">expand_more</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="voip-solution.html" class="dropdown-item">
+                                <div class="dropdown-icon bg-primary/10 text-primary">
+                                    <span class="material-symbols-outlined text-xl">settings_phone</span>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-semibold text-white">VoIP Solution</div>
+                                    <div class="text-xs text-slate-500">HD voice & SIP trunking</div>
+                                </div>
+                            </a>
+                            <a href="ai-agent-solution.html" class="dropdown-item">
+                                <div class="dropdown-icon bg-accent/10 text-accent">
+                                    <span class="material-symbols-outlined text-xl">smart_toy</span>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-semibold text-white">AI Agent Solution</div>
+                                    <div class="text-xs text-slate-500">Intelligent call automation</div>
+                                </div>
+                            </a>
+                            <a href="contact-center-solution.html" class="dropdown-item" style="background:rgba(16,185,129,0.08)">
+                                <div class="dropdown-icon bg-accent-green/10 text-accent-green">
+                                    <span class="material-symbols-outlined text-xl">support_agent</span>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-semibold text-white">Contact Center</div>
+                                    <div class="text-xs text-slate-500">Omnichannel cloud platform</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <a class="nav-link text-sm font-medium text-slate-400 hover:text-white transition-colors" href="contact.html">Contact</a>
+                </nav>
+
+                <div class="flex items-center gap-3">
+                    <button class="hidden sm:block text-sm font-medium text-slate-400 hover:text-white transition-colors px-4 py-2">Log in</button>
+                    <a href="contact.html" class="btn-glow rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white">Book a Demo</a>
+                    <button id="mobile-menu-toggle" class="md:hidden text-slate-400 hover:text-white">
+                        <span class="material-symbols-outlined text-2xl">menu</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm md:hidden">
+            <div class="absolute right-0 top-0 h-full w-72 bg-surface border-l border-white/5 shadow-2xl">
+                <div class="flex items-center justify-between p-6 border-b border-white/5">
+                    <span class="text-lg font-bold text-white">Menu</span>
+                    <button id="mobile-menu-close" class="text-slate-400 hover:text-white">
+                        <span class="material-symbols-outlined text-2xl">close</span>
+                    </button>
+                </div>
+                <nav class="flex flex-col p-6 space-y-5">
+                    <a class="nav-link text-base font-medium text-slate-300 hover:text-primary transition-colors" href="index.html">Home</a>
+                    <div>
+                        <button id="mobile-solutions-toggle" class="flex items-center justify-between w-full text-base font-medium text-primary">
+                            Solutions
+                            <span class="material-symbols-outlined text-sm" id="mobile-solutions-arrow">expand_more</span>
+                        </button>
+                        <div class="mobile-solutions-list open" id="mobile-solutions-list">
+                            <div class="pt-3 pl-4 space-y-3">
+                                <a class="flex items-center gap-3 text-sm text-slate-400 hover:text-primary transition-colors" href="voip-solution.html">
+                                    <span class="material-symbols-outlined text-primary text-lg">settings_phone</span>
+                                    VoIP Solution
+                                </a>
+                                <a class="flex items-center gap-3 text-sm text-slate-400 hover:text-accent transition-colors" href="ai-agent-solution.html">
+                                    <span class="material-symbols-outlined text-accent text-lg">smart_toy</span>
+                                    AI Agent Solution
+                                </a>
+                                <a class="flex items-center gap-3 text-sm text-white font-medium" href="contact-center-solution.html">
+                                    <span class="material-symbols-outlined text-accent-green text-lg">support_agent</span>
+                                    Contact Center
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="nav-link text-base font-medium text-slate-300 hover:text-primary transition-colors" href="contact.html">Contact</a>
+                    <hr class="border-white/10"/>
+                    <a href="contact.html" class="btn-glow rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white w-full text-center">Book a Demo</a>
+                </nav>
+            </div>
+        </div>
+
+        <main class="flex-1">
+
+            <!-- ══════════ HERO ══════════ -->
+            <section class="relative min-h-[60vh] flex items-center px-6 pt-28 pb-20 overflow-hidden">
+                <div class="absolute inset-0 grid-pattern opacity-60"></div>
+                <div class="orb" style="width:500px;height:500px;background:rgba(16,185,129,0.08);top:-150px;right:-100px;filter:blur(100px);animation:float 10s ease-in-out infinite"></div>
+                <div class="orb" style="width:300px;height:300px;background:rgba(34,211,238,0.06);bottom:0;left:-80px;filter:blur(80px);animation:float 14s ease-in-out infinite reverse"></div>
+
+                <div class="relative z-10 mx-auto max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <div class="hero-enter hero-enter-1 inline-flex items-center gap-2 rounded-full border border-accent-green/20 bg-accent-green/5 px-4 py-1.5 mb-6">
+                            <span class="material-symbols-outlined text-accent-green text-sm" style="font-variation-settings:'FILL' 1">support_agent</span>
+                            <span class="text-xs font-semibold text-accent-green tracking-wide">Cloud Contact Center</span>
+                        </div>
+
+                        <h1 class="hero-enter hero-enter-2 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
+                            One Platform.<br/>
+                            <span class="bg-gradient-to-r from-accent-green via-accent to-primary bg-clip-text text-transparent">Every Channel.</span>
+                        </h1>
+
+                        <p class="hero-enter hero-enter-3 text-lg text-slate-400 mb-10 leading-relaxed max-w-lg">
+                            Unify voice, SMS, email, live chat, and AI automation in a single cloud contact center. Empower your agents, delight your customers, and scale without limits.
+                        </p>
+
+                        <div class="hero-enter hero-enter-4 flex flex-col sm:flex-row gap-4 mb-8">
+                            <a href="contact.html" class="btn-glow rounded-xl bg-primary px-8 py-4 text-base font-bold text-white flex items-center justify-center gap-2">
+                                See It in Action
+                                <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                            </a>
+                            <a href="contact.html" class="rounded-xl border border-white/10 bg-white/5 px-8 py-4 text-base font-bold text-slate-200 hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-lg">calendar_month</span>
+                                Book a Demo
+                            </a>
+                        </div>
+
+                        <!-- Channel badges -->
+                        <div class="hero-enter hero-enter-4 flex flex-wrap gap-2">
+                            <span class="channel-badge border border-primary/20 bg-primary/10 text-primary">
+                                <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">call</span> Voice
+                            </span>
+                            <span class="channel-badge border border-accent/20 bg-accent/10 text-accent">
+                                <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">sms</span> SMS
+                            </span>
+                            <span class="channel-badge border border-accent-green/20 bg-accent-green/10 text-accent-green">
+                                <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">mail</span> Email
+                            </span>
+                            <span class="channel-badge border border-white/10 bg-white/5 text-slate-300">
+                                <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">chat</span> Live Chat
+                            </span>
+                            <span class="channel-badge border border-white/10 bg-white/5 text-slate-300">
+                                <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">smart_toy</span> AI Agent
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard mockup -->
+                    <div class="hero-enter hero-enter-4 rounded-2xl border border-white/8 bg-surface-light/80 backdrop-blur-md p-1.5" style="box-shadow:0 25px 80px -12px rgba(16,185,129,0.15)">
+                        <div class="rounded-xl bg-surface overflow-hidden">
+                            <!-- Window chrome -->
+                            <div class="flex items-center justify-between border-b border-white/5 px-4 py-2.5">
+                                <div class="flex items-center gap-2">
+                                    <div class="h-3 w-3 rounded-full bg-red-500/70"></div>
+                                    <div class="h-3 w-3 rounded-full bg-yellow-500/70"></div>
+                                    <div class="h-3 w-3 rounded-full bg-green-500/70"></div>
+                                </div>
+                                <div class="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-1 text-[11px] text-slate-500 font-mono">
+                                    <span class="material-symbols-outlined text-xs">lock</span>
+                                    app.sipvoiceflow.com/contact-center
+                                </div>
+                                <div class="w-[52px]"></div>
+                            </div>
+
+                            <!-- Dashboard content -->
+                            <div class="p-5 space-y-3">
+                                <!-- Agent status bar -->
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Live Queue</span>
+                                    <div class="flex items-center gap-1.5 text-[11px] text-accent-green">
+                                        <div class="live-dot" style="width:5px;height:5px"></div>
+                                        12 agents online
+                                    </div>
+                                </div>
+
+                                <!-- Queue cards -->
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div class="rounded-lg bg-surface-card border border-white/5 p-3 text-center">
+                                        <div class="text-xl font-bold text-white">8</div>
+                                        <div class="text-[10px] text-slate-500 mt-0.5">In Queue</div>
+                                        <div class="text-[10px] text-primary mt-1">Voice</div>
+                                    </div>
+                                    <div class="rounded-lg bg-surface-card border border-white/5 p-3 text-center">
+                                        <div class="text-xl font-bold text-white">14</div>
+                                        <div class="text-[10px] text-slate-500 mt-0.5">Open Tickets</div>
+                                        <div class="text-[10px] text-accent mt-1">Email / SMS</div>
+                                    </div>
+                                    <div class="rounded-lg bg-surface-card border border-white/5 p-3 text-center">
+                                        <div class="text-xl font-bold text-white">3</div>
+                                        <div class="text-[10px] text-slate-500 mt-0.5">Live Chats</div>
+                                        <div class="text-[10px] text-accent-green mt-1">Web Chat</div>
+                                    </div>
+                                </div>
+
+                                <!-- Call volume mini chart -->
+                                <div class="rounded-lg bg-surface-card border border-white/5 p-4">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-xs font-semibold text-slate-300">Today's Volume by Channel</span>
+                                    </div>
+                                    <div class="h-20 flex items-end gap-2">
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <div class="w-full stat-bar bg-primary/70 rounded-t" style="height:80%;animation-delay:0.1s"></div>
+                                            <span class="text-[9px] text-slate-600">Voice</span>
+                                        </div>
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <div class="w-full stat-bar bg-accent/60 rounded-t" style="height:55%;animation-delay:0.2s"></div>
+                                            <span class="text-[9px] text-slate-600">SMS</span>
+                                        </div>
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <div class="w-full stat-bar bg-accent-green/60 rounded-t" style="height:65%;animation-delay:0.3s"></div>
+                                            <span class="text-[9px] text-slate-600">Email</span>
+                                        </div>
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <div class="w-full stat-bar bg-white/30 rounded-t" style="height:35%;animation-delay:0.4s"></div>
+                                            <span class="text-[9px] text-slate-600">Chat</span>
+                                        </div>
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <div class="w-full stat-bar bg-primary/40 rounded-t" style="height:90%;animation-delay:0.5s"></div>
+                                            <span class="text-[9px] text-slate-600">AI</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Agent list snippet -->
+                                <div class="space-y-1.5">
+                                    <div class="flex items-center justify-between rounded-lg bg-surface-card border border-white/5 px-3 py-2.5">
+                                        <div class="flex items-center gap-2.5">
+                                            <div class="h-7 w-7 rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-bold text-primary">SL</div>
+                                            <span class="text-xs text-white">Sarah L.</span>
+                                        </div>
+                                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-accent-green/15 text-accent-green font-medium">On call · 4:21</span>
+                                    </div>
+                                    <div class="flex items-center justify-between rounded-lg bg-surface-card border border-white/5 px-3 py-2.5">
+                                        <div class="flex items-center gap-2.5">
+                                            <div class="h-7 w-7 rounded-full bg-accent/20 flex items-center justify-center text-[10px] font-bold text-accent">MR</div>
+                                            <span class="text-xs text-white">Marcus R.</span>
+                                        </div>
+                                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-yellow-400/15 text-yellow-400 font-medium">Wrap-up</span>
+                                    </div>
+                                    <div class="flex items-center justify-between rounded-lg bg-surface-card border border-white/5 px-3 py-2.5">
+                                        <div class="flex items-center gap-2.5">
+                                            <div class="h-7 w-7 rounded-full bg-accent-green/20 flex items-center justify-center text-[10px] font-bold text-accent-green">JP</div>
+                                            <span class="text-xs text-white">Julia P.</span>
+                                        </div>
+                                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-700 text-slate-400 font-medium">Available</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════ FEATURES ══════════ -->
+            <section class="py-24 px-6 relative overflow-hidden">
+                <div class="orb" style="width:350px;height:350px;background:rgba(16,185,129,0.06);top:10%;right:-100px;filter:blur(100px)"></div>
+
+                <div class="mx-auto max-w-7xl relative z-10">
+                    <div class="text-center max-w-2xl mx-auto mb-16 scroll-reveal">
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-green mb-3 block">Platform Features</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-4">
+                            A complete contact center — no hardware required
+                        </h2>
+                        <p class="text-lg text-slate-400">Everything your team needs to deliver exceptional customer experiences at scale.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7">
+                            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent-green/10 text-accent-green">
+                                <span class="material-symbols-outlined text-2xl">hub</span>
+                            </div>
+                            <h4 class="mb-2 text-lg font-bold text-white">Omnichannel Inbox</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">
+                                All conversations — voice, SMS, email, webchat — unified in a single agent desktop. No more tab-switching; full context always at hand.
+                            </p>
+                        </div>
+
+                        <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7">
+                            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                                <span class="material-symbols-outlined text-2xl">queue</span>
+                            </div>
+                            <h4 class="mb-2 text-lg font-bold text-white">Intelligent Queue Management</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">
+                                Skills-based routing, priority queues, and overflow rules ensure callers reach the right agent fast. Reduce AHT and improve first-call resolution.
+                            </p>
+                        </div>
+
+                        <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7">
+                            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                                <span class="material-symbols-outlined text-2xl">monitoring</span>
+                            </div>
+                            <h4 class="mb-2 text-lg font-bold text-white">Real-Time Analytics</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">
+                                Live dashboards and historical reports across all channels. Monitor SLA compliance, agent performance, and customer satisfaction in real time.
+                            </p>
+                        </div>
+
+                        <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7">
+                            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent-green/10 text-accent-green">
+                                <span class="material-symbols-outlined text-2xl">account_tree</span>
+                            </div>
+                            <h4 class="mb-2 text-lg font-bold text-white">Visual IVR Builder</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">
+                                Drag-and-drop call flow designer. Build complex IVR trees, menus, and AI-assisted self-service flows without writing a single line of code.
+                            </p>
+                        </div>
+
+                        <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7">
+                            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                                <span class="material-symbols-outlined text-2xl">headset_mic</span>
+                            </div>
+                            <h4 class="mb-2 text-lg font-bold text-white">Supervisor Tools</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">
+                                Monitor calls in real time, whisper coaching, barge-in, and call recording. Spot-train agents without interrupting the customer experience.
+                            </p>
+                        </div>
+
+                        <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7">
+                            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                                <span class="material-symbols-outlined text-2xl">integration_instructions</span>
+                            </div>
+                            <h4 class="mb-2 text-lg font-bold text-white">CRM & Helpdesk Integrations</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">
+                                Native integrations with Salesforce, HubSpot, Zendesk, and Freshdesk. Screen-pop customer data before the agent even says hello.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════ HOW IT WORKS ══════════ -->
+            <section class="py-24 px-6 border-y border-white/5 bg-surface-light/30 relative overflow-hidden">
+                <div class="orb" style="width:400px;height:400px;background:rgba(16,185,129,0.05);top:50%;right:-100px;transform:translateY(-50%);filter:blur(100px)"></div>
+
+                <div class="mx-auto max-w-5xl relative z-10">
+                    <div class="text-center mb-16 scroll-reveal">
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-green mb-3 block">Deployment</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                            Launch your contact center in days, not months
+                        </h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="scroll-reveal text-center">
+                            <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 text-primary text-2xl font-extrabold">1</div>
+                            <h4 class="text-lg font-bold text-white mb-2">Configure Your Workspace</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">Set up your teams, queues, channels, and routing rules in our guided onboarding wizard. No IT department needed.</p>
+                        </div>
+                        <div class="scroll-reveal text-center">
+                            <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10 border border-accent/20 text-accent text-2xl font-extrabold">2</div>
+                            <h4 class="text-lg font-bold text-white mb-2">Invite Your Agents</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">Agents log in via browser or mobile app — no phones or hardware required. Assign skills, schedules, and channel access in minutes.</p>
+                        </div>
+                        <div class="scroll-reveal text-center">
+                            <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-green/10 border border-accent-green/20 text-accent-green text-2xl font-extrabold">3</div>
+                            <h4 class="text-lg font-bold text-white mb-2">Go Live</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">Point your numbers at SIP-VoiceFlow, activate your other channels, and you're live. Real-time metrics start flowing from minute one.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════ STATS ══════════ -->
+            <section class="scroll-reveal py-16 px-6 border-b border-white/5">
+                <div class="mx-auto max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">5<span class="text-accent-green">+</span></div>
+                        <div class="text-sm text-slate-500">Channels Unified</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">40<span class="text-primary">%</span></div>
+                        <div class="text-sm text-slate-500">Faster Resolution</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">100<span class="text-accent">+</span></div>
+                        <div class="text-sm text-slate-500">Integrations</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">99.99<span class="text-accent-green">%</span></div>
+                        <div class="text-sm text-slate-500">Uptime SLA</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════ CTA ══════════ -->
+            <section class="scroll-reveal py-28 px-6">
+                <div class="mx-auto max-w-4xl rounded-3xl border border-accent-green/15 bg-gradient-to-br from-accent-green/8 via-surface-light to-primary/5 p-12 md:p-20 text-center relative overflow-hidden">
+                    <div class="absolute inset-0 grid-pattern opacity-30"></div>
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center gap-2 rounded-full border border-accent-green/20 bg-accent-green/5 px-4 py-1.5 mb-6">
+                            <div class="live-dot"></div>
+                            <span class="text-xs font-semibold text-accent-green">Free 14-Day Trial</span>
+                        </div>
+                        <h2 class="mb-5 text-3xl md:text-5xl font-extrabold text-white">Transform your customer experience</h2>
+                        <p class="mx-auto mb-10 max-w-lg text-lg text-slate-400">
+                            Replace legacy call center software with a modern cloud platform. No contracts, no hardware, no risk.
+                        </p>
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <a href="contact.html" class="btn-glow rounded-xl bg-primary px-10 py-4 text-base font-bold text-white">
+                                Start Free Trial
+                            </a>
+                            <a href="contact.html" class="rounded-xl border border-white/10 bg-white/5 px-10 py-4 text-base font-bold text-slate-200 hover:bg-white/10 transition-all">
+                                Request a Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ══════════ FOOTER ══════════ -->
+        <footer class="border-t border-white/5 bg-surface px-6 py-14">
+            <div class="mx-auto max-w-7xl">
+                <div class="grid grid-cols-2 gap-12 md:grid-cols-4 lg:grid-cols-5">
+                    <div class="col-span-2 lg:col-span-1">
+                        <div class="mb-5 flex items-center gap-2">
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent">
+                                <span class="material-symbols-outlined text-white text-lg" style="font-variation-settings:'FILL' 1">cell_tower</span>
+                            </div>
+                            <span class="text-base font-bold text-white">SIP-VoiceFlow</span>
+                        </div>
+                        <p class="text-sm leading-relaxed text-slate-500">Next-gen VoIP and AI automation for modern businesses.</p>
+                    </div>
+                    <div>
+                        <h5 class="mb-4 text-sm font-bold text-white">Solutions</h5>
+                        <ul class="space-y-2.5 text-sm text-slate-500">
+                            <li><a class="hover:text-primary transition-colors" href="voip-solution.html">VoIP Solution</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="ai-agent-solution.html">AI Agent Solution</a></li>
+                            <li><a class="text-accent-green font-medium" href="contact-center-solution.html">Contact Center</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">API Docs</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="mb-4 text-sm font-bold text-white">Company</h5>
+                        <ul class="space-y-2.5 text-sm text-slate-500">
+                            <li><a class="hover:text-primary transition-colors" href="#">About</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="contact.html">Contact</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="mb-4 text-sm font-bold text-white">Legal</h5>
+                        <ul class="space-y-2.5 text-sm text-slate-500">
+                            <li><a class="hover:text-primary transition-colors" href="#">Privacy</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Terms</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#">Security</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-14 border-t border-white/5 pt-8 text-center text-xs text-slate-600">
+                    © 2025 SIP-VoiceFlow Inc. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ElevenLabs AI Voice Agent Widget -->
+    <elevenlabs-convai agent-id="agent_0001khqe7s3hfka9c4fqfpx7ffvv"></elevenlabs-convai>
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('mobile-solutions-toggle');
+            const list = document.getElementById('mobile-solutions-list');
+            const arrow = document.getElementById('mobile-solutions-arrow');
+            if (toggle && list) {
+                toggle.addEventListener('click', function() {
+                    list.classList.toggle('open');
+                    if (arrow) arrow.style.transform = list.classList.contains('open') ? 'rotate(180deg)' : '';
+                });
+            }
+        });
+    </script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
