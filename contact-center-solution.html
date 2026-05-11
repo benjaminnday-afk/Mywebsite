@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="dark" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="SIP-VoiceFlow Contact Center — Omnichannel cloud contact center with voice, SMS, email, chat, and real-time analytics on a single platform."/>
+    <meta name="description" content="SipvoipAI Contact Center — Omnichannel cloud contact center with voice, SMS, email, chat, and real-time analytics on a single platform."/>
     <meta name="keywords" content="cloud contact center, omnichannel, call center software, customer support platform, CCaaS"/>
-    <title>Contact Center Solution — SIP-VoiceFlow</title>
+    <title>Contact Center Solution — SipvoipAI</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -19,10 +19,10 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#0ea5e9",
-                        "primary-dark": "#0284c7",
-                        "accent": "#22d3ee",
-                        "accent-green": "#10b981",
+                        "primary": "#2d7a3a",
+                        "primary-dark": "#1a5c27",
+                        "accent": "#4CAF50",
+                        "accent-green": "#4CAF50",
                         "surface": "#0c1222",
                         "surface-light": "#111b2e",
                         "surface-card": "#152038",
@@ -42,8 +42,8 @@
 
         .grid-pattern {
             background-image:
-                linear-gradient(rgba(14,165,233,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(14,165,233,0.04) 1px, transparent 1px);
+                linear-gradient(rgba(45,122,58,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(45,122,58,0.04) 1px, transparent 1px);
             background-size: 48px 48px;
         }
 
@@ -74,7 +74,7 @@
             position: absolute;
             inset: -1px;
             border-radius: inherit;
-            background: linear-gradient(135deg, #0ea5e9, #22d3ee, #10b981);
+            background: linear-gradient(135deg, #2d7a3a, #4CAF50, #4CAF50);
             z-index: -1;
             opacity: 0;
             filter: blur(12px);
@@ -89,17 +89,17 @@
         }
         .card-lift:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 60px -15px rgba(14,165,233,0.2);
-            border-color: rgba(14,165,233,0.4);
+            box-shadow: 0 20px 60px -15px rgba(45,122,58,0.2);
+            border-color: rgba(45,122,58,0.4);
         }
 
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0c1222; }
-        ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+        ::-webkit-scrollbar-thumb { background: #1a3a1f; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2d7a3a; }
 
-        .nav-link.active { color: #0ea5e9 !important; }
-        .nav-link.active::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:2px; background: linear-gradient(90deg,#0ea5e9,#22d3ee); border-radius: 1px; }
+        .nav-link.active { color: #2d7a3a !important; }
+        .nav-link.active::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:2px; background: linear-gradient(90deg,#2d7a3a,#4CAF50); border-radius: 1px; }
         .nav-link { position: relative; }
 
         html { scroll-behavior: smooth; }
@@ -145,7 +145,7 @@
             transition: background 0.2s;
             text-decoration: none;
         }
-        .dropdown-item:hover { background: rgba(14,165,233,0.1); }
+        .dropdown-item:hover { background: rgba(45,122,58,0.1); }
         .dropdown-icon {
             width: 36px; height: 36px;
             border-radius: 8px;
@@ -159,8 +159,8 @@
         }
         .mobile-solutions-list.open { max-height: 300px; }
 
-        .live-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; position: relative; }
-        .live-dot::after { content:''; position:absolute; inset:-3px; border-radius:50%; border:2px solid rgba(16,185,129,0.4); animation: ping 1.5s cubic-bezier(0,0,0.2,1) infinite; }
+        .live-dot { width: 8px; height: 8px; background: #4CAF50; border-radius: 50%; position: relative; }
+        .live-dot::after { content:''; position:absolute; inset:-3px; border-radius:50%; border:2px solid rgba(76,175,80,0.4); animation: ping 1.5s cubic-bezier(0,0,0.2,1) infinite; }
         @keyframes ping { 75%,100%{transform:scale(2);opacity:0} }
 
         /* Stat bar */
@@ -189,7 +189,7 @@
                     <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/20 transition-transform group-hover:scale-110">
                         <span class="material-symbols-outlined text-white text-xl" style="font-variation-settings:'FILL' 1">cell_tower</span>
                     </div>
-                    <span class="text-lg font-bold tracking-tight text-white">SIP<span class="text-primary">-VoiceFlow</span></span>
+                    <span class="text-lg font-bold tracking-tight text-white">Sip<span class="text-primary">voip</span><span class="text-accent">AI</span></span>
                 </a>
 
                 <nav class="hidden md:flex items-center gap-8">
@@ -218,7 +218,7 @@
                                     <div class="text-xs text-slate-500">Intelligent call automation</div>
                                 </div>
                             </a>
-                            <a href="contact-center-solution.html" class="dropdown-item" style="background:rgba(16,185,129,0.08)">
+                            <a href="contact-center-solution.html" class="dropdown-item" style="background:rgba(76,175,80,0.08)">
                                 <div class="dropdown-icon bg-accent-green/10 text-accent-green">
                                     <span class="material-symbols-outlined text-xl">support_agent</span>
                                 </div>
@@ -287,8 +287,8 @@
             <!-- ══════════ HERO ══════════ -->
             <section class="relative min-h-[60vh] flex items-center px-6 pt-28 pb-20 overflow-hidden">
                 <div class="absolute inset-0 grid-pattern opacity-60"></div>
-                <div class="orb" style="width:500px;height:500px;background:rgba(16,185,129,0.08);top:-150px;right:-100px;filter:blur(100px);animation:float 10s ease-in-out infinite"></div>
-                <div class="orb" style="width:300px;height:300px;background:rgba(34,211,238,0.06);bottom:0;left:-80px;filter:blur(80px);animation:float 14s ease-in-out infinite reverse"></div>
+                <div class="orb" style="width:500px;height:500px;background:rgba(76,175,80,0.08);top:-150px;right:-100px;filter:blur(100px);animation:float 10s ease-in-out infinite"></div>
+                <div class="orb" style="width:300px;height:300px;background:rgba(76,175,80,0.06);bottom:0;left:-80px;filter:blur(80px);animation:float 14s ease-in-out infinite reverse"></div>
 
                 <div class="relative z-10 mx-auto max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
@@ -338,7 +338,7 @@
                     </div>
 
                     <!-- Dashboard mockup -->
-                    <div class="hero-enter hero-enter-4 rounded-2xl border border-white/8 bg-surface-light/80 backdrop-blur-md p-1.5" style="box-shadow:0 25px 80px -12px rgba(16,185,129,0.15)">
+                    <div class="hero-enter hero-enter-4 rounded-2xl border border-white/8 bg-surface-light/80 backdrop-blur-md p-1.5" style="box-shadow:0 25px 80px -12px rgba(76,175,80,0.15)">
                         <div class="rounded-xl bg-surface overflow-hidden">
                             <!-- Window chrome -->
                             <div class="flex items-center justify-between border-b border-white/5 px-4 py-2.5">
@@ -349,7 +349,7 @@
                                 </div>
                                 <div class="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-1 text-[11px] text-slate-500 font-mono">
                                     <span class="material-symbols-outlined text-xs">lock</span>
-                                    app.sipvoiceflow.com/contact-center
+                                    app.sipvoipai.com/contact-center
                                 </div>
                                 <div class="w-[52px]"></div>
                             </div>
@@ -445,7 +445,7 @@
 
             <!-- ══════════ FEATURES ══════════ -->
             <section class="py-24 px-6 relative overflow-hidden">
-                <div class="orb" style="width:350px;height:350px;background:rgba(16,185,129,0.06);top:10%;right:-100px;filter:blur(100px)"></div>
+                <div class="orb" style="width:350px;height:350px;background:rgba(76,175,80,0.06);top:10%;right:-100px;filter:blur(100px)"></div>
 
                 <div class="mx-auto max-w-7xl relative z-10">
                     <div class="text-center max-w-2xl mx-auto mb-16 scroll-reveal">
@@ -522,7 +522,7 @@
 
             <!-- ══════════ HOW IT WORKS ══════════ -->
             <section class="py-24 px-6 border-y border-white/5 bg-surface-light/30 relative overflow-hidden">
-                <div class="orb" style="width:400px;height:400px;background:rgba(16,185,129,0.05);top:50%;right:-100px;transform:translateY(-50%);filter:blur(100px)"></div>
+                <div class="orb" style="width:400px;height:400px;background:rgba(76,175,80,0.05);top:50%;right:-100px;transform:translateY(-50%);filter:blur(100px)"></div>
 
                 <div class="mx-auto max-w-5xl relative z-10">
                     <div class="text-center mb-16 scroll-reveal">
@@ -546,7 +546,7 @@
                         <div class="scroll-reveal text-center">
                             <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-green/10 border border-accent-green/20 text-accent-green text-2xl font-extrabold">3</div>
                             <h4 class="text-lg font-bold text-white mb-2">Go Live</h4>
-                            <p class="text-sm text-slate-400 leading-relaxed">Point your numbers at SIP-VoiceFlow, activate your other channels, and you're live. Real-time metrics start flowing from minute one.</p>
+                            <p class="text-sm text-slate-400 leading-relaxed">Point your numbers at SipvoipAI, activate your other channels, and you're live. Real-time metrics start flowing from minute one.</p>
                         </div>
                     </div>
                 </div>
@@ -609,9 +609,9 @@
                             <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent">
                                 <span class="material-symbols-outlined text-white text-lg" style="font-variation-settings:'FILL' 1">cell_tower</span>
                             </div>
-                            <span class="text-base font-bold text-white">SIP-VoiceFlow</span>
+                            <span class="text-base font-bold text-white">Sip<span class="text-primary">voip</span><span class="text-accent">AI</span></span>
                         </div>
-                        <p class="text-sm leading-relaxed text-slate-500">Next-gen VoIP and AI automation for modern businesses.</p>
+                        <p class="text-sm leading-relaxed text-slate-500">AI-Powered Business Communication Systems</p>
                     </div>
                     <div>
                         <h5 class="mb-4 text-sm font-bold text-white">Solutions</h5>
@@ -640,8 +640,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mt-14 border-t border-white/5 pt-8 text-center text-xs text-slate-600">
-                    © 2025 SIP-VoiceFlow Inc. All rights reserved.
+                <div class="mt-14 border-t border-white/5 pt-8 space-y-2 text-center">
+                    <p class="text-xs text-slate-500">Powered by Cisco BroadWorks &amp; Uboss Platform</p>
+                    <p class="text-xs text-slate-600">© 2025 SipvoipAI Inc. All rights reserved.</p>
                 </div>
             </div>
         </footer>

@@ -1,4 +1,4 @@
-/* Telecom AI - Custom Styles */
+﻿/* Telecom AI - Custom Styles */
 /* This file contains shared styles and enhancements across all pages */
 
 /* Smooth scrolling behavior */
@@ -42,7 +42,7 @@ html {
 
 .btn-primary:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(37, 157, 244, 0.4);
+    box-shadow: 0 0 30px rgba(45, 122, 58, 0.4);
 }
 
 .btn-primary:active {
@@ -56,8 +56,8 @@ html {
 
 .card-hover:hover {
     transform: translateY(-4px);
-    box-shadow: 0 0 20px rgba(37, 157, 244, 0.2);
-    border-color: rgba(37, 157, 244, 0.5);
+    box-shadow: 0 0 20px rgba(45, 122, 58, 0.2);
+    border-color: rgba(45, 122, 58, 0.5);
 }
 
 /* Mobile menu animations */
@@ -78,8 +78,8 @@ input:focus,
 textarea:focus, 
 select:focus {
     outline: none;
-    border-color: #259df4;
-    box-shadow: 0 0 0 3px rgba(37, 157, 244, 0.1);
+    border-color: #2d7a3a;
+    box-shadow: 0 0 0 3px rgba(45, 122, 58, 0.1);
 }
 
 /* Loading state */
@@ -97,7 +97,7 @@ select:focus {
     width: 20px;
     height: 20px;
     margin: -10px 0 0 -10px;
-    border: 2px solid #259df4;
+    border: 2px solid #2d7a3a;
     border-top-color: transparent;
     border-radius: 50%;
     animation: spin 0.6s linear infinite;
@@ -111,7 +111,7 @@ select:focus {
 
 /* Navigation active state */
 .nav-link.active {
-    color: #259df4 !important;
+    color: #2d7a3a !important;
     position: relative;
 }
 
@@ -122,7 +122,7 @@ select:focus {
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, #259df4, #10b981);
+    background: linear-gradient(90deg, #2d7a3a, #4CAF50);
 }
 
 /* Scroll reveal animations */
@@ -139,14 +139,14 @@ select:focus {
 
 /* Utility classes */
 .text-gradient {
-    background: linear-gradient(135deg, #259df4, #10b981);
+    background: linear-gradient(135deg, #2d7a3a, #4CAF50);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .glow-text {
-    text-shadow: 0 0 20px rgba(37, 157, 244, 0.5);
+    text-shadow: 0 0 20px rgba(45, 122, 58, 0.5);
 }
 
 /* Custom scrollbar for webkit browsers */
@@ -159,12 +159,12 @@ select:focus {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #259df4;
+    background: #2d7a3a;
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #1d8dd8;
+    background: #1a5c27;
 }
 
 /* Print styles */

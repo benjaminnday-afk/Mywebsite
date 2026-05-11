@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="dark" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="SIP-VoiceFlow — Intelligent VoIP & AI-Powered Telecom Solutions. Transform your business communications with next-gen automation."/>
-    <meta name="keywords" content="SIP, VoIP, AI, telecom, automation, cloud communications, SIP trunking"/>
-    <title>SIP-VoiceFlow — Intelligent VoIP & AI Automation</title>
+    <meta name="description" content="SipvoipAI — AI-Powered Business Communication Systems. Cloud Phone Systems (BroadWorks), Cisco Webex Integration, AI Call Automation and Smart AI Receptionist for modern businesses."/>
+    <meta name="keywords" content="SIP, VoIP, AI, telecom, BroadWorks, Cisco Webex, cloud phone system, AI receptionist, Montreal"/>
+    <title>SipvoipAI — AI-Powered Business Communication Systems</title>
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -19,10 +19,10 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#0ea5e9",
-                        "primary-dark": "#0284c7",
-                        "accent": "#22d3ee",
-                        "accent-green": "#10b981",
+                        "primary": "#2d7a3a",
+                        "primary-dark": "#1a5c27",
+                        "accent": "#4CAF50",
+                        "accent-green": "#4CAF50",
                         "surface": "#0c1222",
                         "surface-light": "#111b2e",
                         "surface-card": "#152038",
@@ -43,24 +43,24 @@
         /* ── Hero background ── */
         .hero-bg {
             background: 
-                radial-gradient(ellipse 80% 60% at 50% 40%, rgba(14,165,233,0.12) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 40% at 80% 20%, rgba(34,211,238,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse 40% 50% at 20% 60%, rgba(16,185,129,0.06) 0%, transparent 60%);
+                radial-gradient(ellipse 80% 60% at 50% 40%, rgba(45,122,58,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 80% 20%, rgba(76,175,80,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 50% at 20% 60%, rgba(76,175,80,0.06) 0%, transparent 60%);
         }
         
         /* ── Grid pattern ── */
         .grid-pattern {
             background-image: 
-                linear-gradient(rgba(14,165,233,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(14,165,233,0.04) 1px, transparent 1px);
+                linear-gradient(rgba(45,122,58,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(45,122,58,0.04) 1px, transparent 1px);
             background-size: 48px 48px;
         }
         
         /* ── Glow orbs ── */
         .orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
-        .orb-1 { width: 400px; height: 400px; background: rgba(14,165,233,0.15); top: -100px; left: -100px; animation: float 8s ease-in-out infinite; }
-        .orb-2 { width: 300px; height: 300px; background: rgba(34,211,238,0.1); bottom: 10%; right: -80px; animation: float 10s ease-in-out infinite reverse; }
-        .orb-3 { width: 250px; height: 250px; background: rgba(16,185,129,0.08); top: 40%; left: 60%; animation: float 12s ease-in-out infinite 2s; }
+        .orb-1 { width: 400px; height: 400px; background: rgba(45,122,58,0.15); top: -100px; left: -100px; animation: float 8s ease-in-out infinite; }
+        .orb-2 { width: 300px; height: 300px; background: rgba(76,175,80,0.1); bottom: 10%; right: -80px; animation: float 10s ease-in-out infinite reverse; }
+        .orb-3 { width: 250px; height: 250px; background: rgba(76,175,80,0.08); top: 40%; left: 60%; animation: float 12s ease-in-out infinite 2s; }
         
         @keyframes float {
             0%, 100% { transform: translate(0, 0) scale(1); }
@@ -94,7 +94,7 @@
             position: absolute;
             inset: -1px;
             border-radius: inherit;
-            background: linear-gradient(135deg, #0ea5e9, #22d3ee, #10b981);
+            background: linear-gradient(135deg, #2d7a3a, #4CAF50, #4CAF50);
             z-index: -1;
             opacity: 0;
             filter: blur(12px);
@@ -110,30 +110,30 @@
         }
         .card-lift:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 60px -15px rgba(14,165,233,0.2);
-            border-color: rgba(14,165,233,0.4);
+            box-shadow: 0 20px 60px -15px rgba(45,122,58,0.2);
+            border-color: rgba(45,122,58,0.4);
         }
         
         /* ── Dashboard mockup ── */
         .dashboard-glow {
             box-shadow: 
-                0 0 0 1px rgba(14,165,233,0.15),
-                0 25px 80px -12px rgba(14,165,233,0.25),
-                0 0 120px -30px rgba(34,211,238,0.15);
+                0 0 0 1px rgba(45,122,58,0.15),
+                0 25px 80px -12px rgba(45,122,58,0.25),
+                0 0 120px -30px rgba(76,175,80,0.15);
         }
         
         /* ── Typing cursor ── */
         .cursor-blink::after {
             content: '|';
             animation: blink 1s step-end infinite;
-            color: #22d3ee;
+            color: #4CAF50;
             margin-left: 2px;
         }
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
         
         /* ── Pulse dot ── */
-        .live-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; position: relative; }
-        .live-dot::after { content:''; position:absolute; inset:-3px; border-radius:50%; border:2px solid rgba(16,185,129,0.4); animation: ping 1.5s cubic-bezier(0,0,0.2,1) infinite; }
+        .live-dot { width: 8px; height: 8px; background: #4CAF50; border-radius: 50%; position: relative; }
+        .live-dot::after { content:''; position:absolute; inset:-3px; border-radius:50%; border:2px solid rgba(76,175,80,0.4); animation: ping 1.5s cubic-bezier(0,0,0.2,1) infinite; }
         @keyframes ping { 75%,100%{transform:scale(2);opacity:0} }
         
         /* ── Stat counter animation ── */
@@ -143,12 +143,12 @@
         /* ── Scrollbar ── */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0c1222; }
-        ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+        ::-webkit-scrollbar-thumb { background: #1a3a1f; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2d7a3a; }
         
         /* ── Nav active ── */
-        .nav-link.active { color: #0ea5e9 !important; }
-        .nav-link.active::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:2px; background: linear-gradient(90deg,#0ea5e9,#22d3ee); border-radius: 1px; }
+        .nav-link.active { color: #2d7a3a !important; }
+        .nav-link.active::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:2px; background: linear-gradient(90deg,#2d7a3a,#4CAF50); border-radius: 1px; }
         .nav-link { position: relative; }
 
         /* ── Smooth scroll ── */
@@ -201,7 +201,7 @@
             text-decoration: none;
         }
         .dropdown-item:hover {
-            background: rgba(14,165,233,0.1);
+            background: rgba(45,122,58,0.1);
         }
         .dropdown-icon {
             width: 36px;
@@ -286,7 +286,7 @@
                     <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/20 transition-transform group-hover:scale-110">
                         <span class="material-symbols-outlined text-white text-xl" style="font-variation-settings:'FILL' 1">cell_tower</span>
                     </div>
-                    <span class="text-lg font-bold tracking-tight text-white">SIP<span class="text-primary">-VoiceFlow</span></span>
+                    <span class="text-lg font-bold tracking-tight text-white">Sip<span class="text-primary">voip</span><span class="text-accent">AI</span></span>
                 </a>
                 
                 <!-- Desktop Nav -->
@@ -352,9 +352,9 @@
                         <span class="material-symbols-outlined text-sm">mail</span>
                         info@sipvoipai.com
                     </a>
-                    <a href="tel:+14386096257" class="hidden lg:flex items-center gap-1.5 text-sm text-slate-400 hover:text-primary transition-colors">
+                    <a href="tel:+15144589062" class="hidden lg:flex items-center gap-1.5 text-sm text-slate-400 hover:text-primary transition-colors">
                         <span class="material-symbols-outlined text-sm">call</span>
-                        +1 438 609 6257
+                        +1 514-458-9062
                     </a>
                     <button id="mobile-menu-toggle" class="md:hidden text-slate-400 hover:text-white">
                         <span class="material-symbols-outlined text-2xl">menu</span>
@@ -441,7 +441,7 @@
                         
                         <!-- Subheading -->
                         <p class="hero-enter hero-enter-3 text-lg md:text-xl text-slate-400 max-w-xl mx-auto mb-10 leading-relaxed">
-                            SIP-VoiceFlow delivers enterprise-grade VoIP, intelligent call routing, and AI automation — so you never miss a lead again.
+                            SipvoipAI delivers enterprise-grade VoIP, intelligent call routing, and AI automation — so you never miss a lead again.
                         </p>
                         
                         <!-- CTA Buttons -->
@@ -481,7 +481,7 @@
                                 </div>
                                 <div class="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-1 text-[11px] text-slate-500 font-mono">
                                     <span class="material-symbols-outlined text-xs">lock</span>
-                                    app.sipvoiceflow.com/dashboard
+                                    app.sipvoipai.com/dashboard
                                 </div>
                                 <div class="w-[52px]"></div>
                             </div>
@@ -766,7 +766,7 @@
 
             <!-- ══════════ SERVICES ══════════ -->
             <section class="py-28 px-6 relative overflow-hidden">
-                <div class="orb" style="width:300px;height:300px;background:rgba(14,165,233,0.06);top:20%;right:-100px;filter:blur(100px)"></div>
+                <div class="orb" style="width:300px;height:300px;background:rgba(45,122,58,0.06);top:20%;right:-100px;filter:blur(100px)"></div>
                 
                 <div class="mx-auto max-w-7xl relative z-10">
                     <div class="mb-16 max-w-2xl scroll-reveal">
@@ -783,55 +783,55 @@
                         <!-- Card 1 -->
                         <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7 flex flex-col">
                             <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                                <span class="material-symbols-outlined text-2xl">smart_toy</span>
+                                <span class="material-symbols-outlined text-2xl">phone_in_talk</span>
                             </div>
-                            <h4 class="mb-2 text-lg font-bold text-white">AI Receptionist</h4>
+                            <h4 class="mb-2 text-lg font-bold text-white">Cloud Phone Systems (BroadWorks)</h4>
                             <p class="text-sm text-slate-400 leading-relaxed mb-5 flex-1">
-                                24/7 intelligent call handling with natural language understanding. Books appointments, answers FAQs, and routes calls instantly.
+                                Enterprise cloud PBX powered by Cisco BroadWorks. Scalable, feature-rich hosted telephony for businesses of all sizes.
                             </p>
-                            <a class="flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-3 transition-all" href="ai-agent-solution.html">
+                            <a class="flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-3 transition-all" href="voip-solution.html">
                                 Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span>
                             </a>
                         </div>
-                        
+
                         <!-- Card 2 -->
                         <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7 flex flex-col">
                             <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-accent-green/10 text-accent-green">
-                                <span class="material-symbols-outlined text-2xl">settings_phone</span>
+                                <span class="material-symbols-outlined text-2xl">video_call</span>
                             </div>
-                            <h4 class="mb-2 text-lg font-bold text-white">SIP Trunking</h4>
+                            <h4 class="mb-2 text-lg font-bold text-white">Cisco Webex Integration</h4>
                             <p class="text-sm text-slate-400 leading-relaxed mb-5 flex-1">
-                                Crystal-clear HD voice with global coverage. Flexible SIP trunks that scale with your business needs.
+                                Seamless Cisco Webex integration for unified communications, video conferencing, and team collaboration — all in one platform.
                             </p>
                             <a class="flex items-center gap-1.5 text-sm font-semibold text-accent-green hover:gap-3 transition-all" href="voip-solution.html">
                                 Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span>
                             </a>
                         </div>
-                        
+
                         <!-- Card 3 -->
                         <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7 flex flex-col">
                             <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-                                <span class="material-symbols-outlined text-2xl">auto_awesome</span>
+                                <span class="material-symbols-outlined text-2xl">auto_mode</span>
                             </div>
-                            <h4 class="mb-2 text-lg font-bold text-white">AI Workflows</h4>
+                            <h4 class="mb-2 text-lg font-bold text-white">AI Call Automation</h4>
                             <p class="text-sm text-slate-400 leading-relaxed mb-5 flex-1">
-                                Automate follow-ups, transcriptions, CRM updates, and lead scoring — all triggered by your calls.
+                                Automate inbound/outbound calls, transcriptions, CRM updates, and follow-ups — all powered by intelligent AI workflows.
                             </p>
                             <a class="flex items-center gap-1.5 text-sm font-semibold text-accent hover:gap-3 transition-all" href="ai-agent-solution.html">
                                 Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span>
                             </a>
                         </div>
-                        
+
                         <!-- Card 4 -->
                         <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7 flex flex-col">
                             <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                                <span class="material-symbols-outlined text-2xl">cloud_sync</span>
+                                <span class="material-symbols-outlined text-2xl">support_agent</span>
                             </div>
-                            <h4 class="mb-2 text-lg font-bold text-white">Cloud PBX</h4>
+                            <h4 class="mb-2 text-lg font-bold text-white">Smart AI Receptionist</h4>
                             <p class="text-sm text-slate-400 leading-relaxed mb-5 flex-1">
-                                Enterprise-grade phone system in the cloud. No hardware, no maintenance — just plug and talk.
+                                24/7 AI-powered virtual receptionist that handles calls, books appointments, answers FAQs, and routes customers automatically.
                             </p>
-                            <a class="flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-3 transition-all" href="contact-center-solution.html">
+                            <a class="flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-3 transition-all" href="ai-agent-solution.html">
                                 Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span>
                             </a>
                         </div>
@@ -868,7 +868,7 @@
                     <div class="relative z-10">
                         <h2 class="mb-5 text-3xl md:text-5xl font-extrabold text-white">Ready to upgrade your comms?</h2>
                         <p class="mx-auto mb-10 max-w-lg text-lg text-slate-400">
-                            Discover how SIP-VoiceFlow can transform your business communications. Let's talk.
+                            Discover how SipvoipAI can transform your business communications. Let's talk.
                         </p>
                         <div class="flex flex-col sm:flex-row justify-center gap-4">
                             <a href="contact.html" class="btn-glow rounded-xl bg-primary px-10 py-4 text-base font-bold text-white">
@@ -892,11 +892,12 @@
                             <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent">
                                 <span class="material-symbols-outlined text-white text-lg" style="font-variation-settings:'FILL' 1">cell_tower</span>
                             </div>
-                            <span class="text-base font-bold text-white">SIP-VoiceFlow</span>
+                            <span class="text-base font-bold text-white">Sip<span class="text-primary">voip</span><span class="text-accent">AI</span></span>
                         </div>
-                        <p class="text-sm leading-relaxed text-slate-500">
-                            Next-gen VoIP and AI automation for modern businesses.
+                        <p class="text-sm leading-relaxed text-slate-500 mb-1">
+                            AI-Powered Business Communication Systems
                         </p>
+                        <p class="text-xs text-slate-600">Digital Communication Experts</p>
                     </div>
                     <div>
                         <h5 class="mb-4 text-sm font-bold text-white">Solutions</h5>
@@ -918,6 +919,15 @@
                         </ul>
                     </div>
                     <div>
+                        <h5 class="mb-4 text-sm font-bold text-white">Contact</h5>
+                        <ul class="space-y-2.5 text-sm text-slate-500">
+                            <li><a class="hover:text-primary transition-colors" href="mailto:info@sipvoipai.com">info@sipvoipai.com</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="tel:+15144589062">+1 514-458-9062</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="tel:+14386096257">+1 438 609 6257</a></li>
+                            <li><span>Montreal, Canada</span></li>
+                        </ul>
+                    </div>
+                    <div>
                         <h5 class="mb-4 text-sm font-bold text-white">Legal</h5>
                         <ul class="space-y-2.5 text-sm text-slate-500">
                             <li><a class="hover:text-primary transition-colors" href="#">Privacy</a></li>
@@ -926,8 +936,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mt-14 border-t border-white/5 pt-8 text-center text-xs text-slate-600">
-                    © 2025 SIP-VoiceFlow Inc. All rights reserved.
+                <div class="mt-14 border-t border-white/5 pt-8 space-y-2 text-center">
+                    <p class="text-xs text-slate-500">Powered by Cisco BroadWorks &amp; Uboss Platform</p>
+                    <p class="text-xs text-slate-600">© 2025 SipvoipAI Inc. All rights reserved.</p>
                 </div>
             </div>
         </footer>
