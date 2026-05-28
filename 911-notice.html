@@ -1,815 +1,376 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SipvoipAI VoIP 9-1-1 Emergency Service Information — Important notice regarding the differences and limitations of VoIP emergency calling."/>
-  <title>SipvoipAI | VoIP 9-1-1 Emergency Service Information</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SipvoipAI | VoIP 9-1-1 Emergency Service Information</title>
+    <meta name="description" content="VoIP 9-1-1 Emergency Service Information for SipvoipAI customers. Important limitations and differences from traditional 9-1-1 services."/>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2d7a3a","primary-dark": "#1a5c27",
+                        "accent": "#4CAF50","accent-green": "#4CAF50",
+                        "surface": "#0c1222","surface-light": "#111b2e","surface-card": "#152038",
+                    },
+                    fontFamily: { "display": ["Outfit","sans-serif"], "mono": ["JetBrains Mono","monospace"] },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/custom.css"/>
+    <style>
+        *,*::before,*::after{box-sizing:border-box;}
+        body{font-family:'Outfit',sans-serif;background:#0c1222;color:#e2e8f0;overflow-x:hidden;}
+        .grid-pattern{background-image:linear-gradient(rgba(45,122,58,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(45,122,58,0.04) 1px,transparent 1px);background-size:48px 48px;}
+        .orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+        @keyframes float{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-20px) scale(1.05);}66%{transform:translate(-20px,15px) scale(0.95);}}
+        .hero-enter{opacity:0;transform:translateY(32px);animation:heroIn 0.8s cubic-bezier(0.16,1,0.3,1) forwards;}
+        .hero-enter-1{animation-delay:0.1s;}.hero-enter-2{animation-delay:0.25s;}.hero-enter-3{animation-delay:0.4s;}.hero-enter-4{animation-delay:0.55s;}
+        @keyframes heroIn{to{opacity:1;transform:translateY(0);}}
+        .scroll-reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1);}
+        .scroll-reveal.revealed{opacity:1;transform:translateY(0);}
+        .btn-glow{position:relative;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);}
+        .btn-glow::after{content:'';position:absolute;inset:-1px;border-radius:inherit;background:linear-gradient(135deg,#2d7a3a,#4CAF50);z-index:-1;opacity:0;filter:blur(12px);transition:opacity 0.3s;}
+        .btn-glow:hover::after{opacity:0.6;}.btn-glow:hover{transform:translateY(-2px);}.btn-glow:active{transform:translateY(0);}
+        .card-lift{transition:all 0.4s cubic-bezier(0.16,1,0.3,1);}
+        .card-lift:hover{transform:translateY(-6px);box-shadow:0 20px 60px -15px rgba(45,122,58,0.2);border-color:rgba(45,122,58,0.4);}
+        ::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:#0c1222;}
+        ::-webkit-scrollbar-thumb{background:#1a3a1f;border-radius:4px;}::-webkit-scrollbar-thumb:hover{background:#2d7a3a;}
+        .nav-link.active{color:#2d7a3a !important;}
+        .nav-link.active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:linear-gradient(90deg,#2d7a3a,#4CAF50);border-radius:1px;}
+        .nav-link{position:relative;}
+        html{scroll-behavior:smooth;}
+        .mobile-menu{transition:opacity 0.3s;}.mobile-menu.hidden{opacity:0;pointer-events:none;}.mobile-menu.visible{opacity:1;pointer-events:all;}
+        .dropdown{position:relative;}
+        .dropdown-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(0);min-width:260px;background:#111b2e;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:8px;opacity:0;pointer-events:none;transition:all 0.25s cubic-bezier(0.16,1,0.3,1);box-shadow:0 20px 60px -15px rgba(0,0,0,0.5);z-index:100;}
+        .dropdown-menu::before{content:'';position:absolute;top:-16px;left:0;right:0;height:16px;background:transparent;}
+        .dropdown:hover .dropdown-menu{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);}
+        .dropdown-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;transition:background 0.2s;text-decoration:none;}
+        .dropdown-item:hover{background:rgba(45,122,58,0.1);}
+        .dropdown-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+        .mobile-solutions-list{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
+        .mobile-solutions-list.open{max-height:300px;}
+        .check-item{display:flex;align-items:flex-start;gap:12px;}
 
-  <!-- Fonts: site (Outfit) + 911 page (DM Sans, Playfair Display) + Material Symbols -->
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-
-  <!-- Tailwind CSS (for site nav + footer) -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "primary": "#2d7a3a",
-            "primary-dark": "#1a5c27",
-            "accent": "#4CAF50",
-            "accent-green": "#4CAF50",
-            "surface": "#0c1222",
-            "surface-light": "#111b2e",
-            "surface-card": "#152038",
-          },
-          fontFamily: {
-            "display": ["Outfit", "sans-serif"],
-            "mono": ["JetBrains Mono", "monospace"],
-          },
-        },
-      },
-    }
-  </script>
-
-  <style>
-    /* ══════════ SITE NAV / FOOTER STYLES ══════════ */
-    .site-nav *, footer.site-footer * {
-      font-family: 'Outfit', sans-serif;
-    }
-
-    .nav-link { position: relative; }
-    .nav-link.active { color: #2d7a3a !important; }
-    .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #2d7a3a, #4CAF50);
-      border-radius: 1px;
-    }
-
-    .mobile-menu-911 { transition: opacity 0.3s; }
-    .mobile-menu-911.hidden { opacity: 0; pointer-events: none; }
-    .mobile-menu-911.visible { opacity: 1; pointer-events: all; }
-
-    .dropdown { position: relative; }
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      min-width: 260px;
-      background: #111b2e;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 8px;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 20px 60px -15px rgba(0,0,0,0.5);
-      z-index: 100;
-    }
-    .dropdown-menu::before {
-      content: '';
-      position: absolute;
-      top: -16px; left: 0; right: 0;
-      height: 16px;
-      background: transparent;
-    }
-    .dropdown:hover .dropdown-menu { opacity: 1; pointer-events: all; }
-    .dropdown-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      transition: background 0.2s;
-      text-decoration: none;
-    }
-    .dropdown-item:hover { background: rgba(45,122,58,0.1); }
-    .dropdown-icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .mobile-solutions-list {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    .mobile-solutions-list.open { max-height: 300px; }
-
-    .btn-glow {
-      position: relative;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .btn-glow::after {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      background: linear-gradient(135deg, #2d7a3a, #4CAF50);
-      z-index: -1;
-      opacity: 0;
-      filter: blur(12px);
-      transition: opacity 0.3s;
-    }
-    .btn-glow:hover::after { opacity: 0.6; }
-    .btn-glow:hover { transform: translateY(-2px); }
-    .btn-glow:active { transform: translateY(0); }
-
-    /* ══════════ 911 NOTICE PAGE STYLES ══════════ */
-    :root {
-      --bg: #FAFAF8;
-      --surface-911: #FFFFFF;
-      --text: #1A1A1A;
-      --text-secondary: #555555;
-      --accent-red: #B71C1C;
-      --accent-light: #FFEBEE;
-      --accent-dark: #7F0000;
-      --border: #E0E0E0;
-      --green: #2d7a3a;
-      --green-light: #E8F5E9;
-      --warning-bg: #FFF8E1;
-      --warning-border: #FFB300;
-      --green-brand: #2E7D32;
-      --green-brand-light: #E8F5E9;
-    }
-
-    /* Only reset within the 911 notice content area */
-    .notice-page * { box-sizing: border-box; }
-
-    .notice-page {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* 911 Emergency Hero Header */
-    .header-911 {
-      background: linear-gradient(135deg, #1a2e1a 0%, #163e2a 50%, #0f6034 100%);
-      color: white;
-      padding: 3rem 2rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .header-911::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background:
-        radial-gradient(circle at 30% 50%, rgba(183,28,28,0.2) 0%, transparent 50%),
-        radial-gradient(circle at 70% 50%, rgba(45,122,58,0.15) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .header-911-content {
-      position: relative;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .logo-911 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 0.5rem;
-      color: white;
-    }
-
-    .logo-911 span { color: #4CAF50; }
-
-    .header-911-subtitle {
-      font-size: 1.1rem;
-      opacity: 0.85;
-      font-weight: 400;
-      margin-bottom: 1.5rem;
-    }
-
-    .emergency-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(183,28,28,0.9);
-      padding: 0.6rem 1.5rem;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      color: white;
-    }
-
-    .emergency-badge::before {
-      content: '⚠';
-      font-size: 1.1rem;
-    }
-
-    /* Notice container */
-    .notice-container {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem 4rem;
-    }
-
-    /* Alert Box */
-    .alert-box {
-      background: var(--accent-light);
-      border-left: 5px solid var(--accent-red);
-      padding: 1.5rem 1.8rem;
-      border-radius: 0 12px 12px 0;
-      margin-bottom: 2.5rem;
-    }
-
-    .alert-box h2 {
-      font-family: 'Playfair Display', serif;
-      color: var(--accent-dark);
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .alert-box p {
-      color: var(--accent-dark);
-      font-size: 0.95rem;
-      margin: 0;
-    }
-
-    /* Sections */
-    .notice-section {
-      background: var(--surface-911);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem 2.2rem;
-      margin-bottom: 1.8rem;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-      transition: box-shadow 0.3s ease;
-    }
-
-    .notice-section:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-
-    .section-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      background: #2d7a3a;
-      color: white;
-      border-radius: 50%;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 0.8rem;
-    }
-
-    .notice-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      color: var(--text);
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-
-    .notice-section p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .notice-section p:last-child { margin-bottom: 0; }
-
-    /* Highlight boxes */
-    .highlight {
-      border-radius: 10px;
-      padding: 1rem 1.3rem;
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-    }
-
-    .highlight strong { color: var(--text); }
-
-    .highlight-warning {
-      background: var(--warning-bg);
-      border: 1px solid var(--warning-border);
-    }
-
-    .highlight-green {
-      background: var(--green-brand-light);
-      border: 1px solid var(--green-brand);
-    }
-
-    .highlight-blue {
-      background: #E8F5E9;
-      border: 1px solid #2d7a3a;
-    }
-
-    /* Sticker Section */
-    .sticker-section {
-      background: var(--surface-911);
-      border: 3px dashed var(--accent-red);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 1.8rem;
-      text-align: center;
-    }
-
-    .sticker-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
-
-    .sticker-section h2 {
-      font-family: 'Playfair Display', serif;
-      color: var(--accent-red);
-      font-size: 1.4rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .sticker-section p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .sticker-url {
-      display: inline-block;
-      margin-top: 1rem;
-      color: #2d7a3a;
-      font-weight: 600;
-      text-decoration: none;
-      border-bottom: 2px solid #2d7a3a;
-      padding-bottom: 2px;
-    }
-
-    /* Terms of Service Section */
-    .tos-section {
-      background: #1a2e1a;
-      color: white;
-      border-radius: 16px;
-      padding: 2.5rem;
-      margin-bottom: 1.8rem;
-    }
-
-    .tos-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      margin-bottom: 1.2rem;
-      color: white;
-    }
-
-    .tos-section h3 {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #EF5350;
-      margin-top: 1.5rem;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .tos-section p {
-      color: rgba(255,255,255,0.8);
-      font-size: 0.92rem;
-      margin-bottom: 0.8rem;
-      line-height: 1.8;
-    }
-
-    /* Consent Section */
-    .consent-section {
-      background: var(--green-brand-light);
-      border: 2px solid var(--green-brand);
-      border-radius: 16px;
-      padding: 2rem 2.2rem;
-      margin-bottom: 1.8rem;
-      text-align: center;
-    }
-
-    .consent-section h2 {
-      font-family: 'Playfair Display', serif;
-      color: var(--green-brand);
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-    }
-
-    .consent-section p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 1.2rem;
-    }
-
-    .consent-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-agree {
-      background: var(--green-brand);
-      color: white;
-      border: none;
-      padding: 0.8rem 2.5rem;
-      border-radius: 50px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-agree:hover { background: #1B5E20; transform: translateY(-1px); }
-
-    .btn-decline {
-      background: transparent;
-      color: var(--text-secondary);
-      border: 2px solid var(--border);
-      padding: 0.8rem 2.5rem;
-      border-radius: 50px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-decline:hover { border-color: var(--accent-red); color: var(--accent-red); }
-
-    /* Contact */
-    .contact-section-911 {
-      text-align: center;
-      padding: 2rem;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-
-    .contact-section-911 a {
-      color: #2d7a3a;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    /* Regulatory footer */
-    .reg-footer {
-      text-align: center;
-      padding: 2rem;
-      border-top: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-size: 0.8rem;
-      line-height: 1.8;
-    }
-
-    .reg-footer a { color: #2d7a3a; text-decoration: none; }
-    .reg-footer p { margin-bottom: 0.4rem; }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      .header-911 { padding: 2rem 1.2rem; }
-      .logo-911 { font-size: 1.8rem; }
-      .notice-container { padding: 1.5rem 1rem 3rem; }
-      .notice-section { padding: 1.5rem; }
-      .tos-section { padding: 1.5rem; }
-      .consent-buttons { flex-direction: column; align-items: center; }
-    }
-  </style>
+        /* 911-specific styles */
+        :root {
+            --bg: #FAFAF8; --surface-911: #FFFFFF; --text: #1A1A1A; --text-secondary: #555555;
+            --accent-red: #B71C1C; --accent-light: #FFEBEE; --accent-dark: #7F0000;
+            --border: #E0E0E0; --green: #2d7a3a; --green-light: #E8F5E9;
+            --warning-bg: #FFF8E1; --warning-border: #FFB300;
+            --green-brand: #2E7D32; --green-brand-light: #E8F5E9;
+        }
+        .notice-page { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .header-911 { background: linear-gradient(135deg, #1a2e1a 0%, #163e2a 50%, #0f6034 100%); color: white; padding: 3rem 2rem; text-align: center; position: relative; overflow: hidden; }
+        .header-911::before { content:''; position:absolute; top:-50%;left:-50%;width:200%;height:200%; background: radial-gradient(circle at 30% 50%, rgba(183,28,28,0.2) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(45,122,58,0.15) 0%, transparent 50%); pointer-events:none; }
+        .header-911-content { position:relative; max-width:800px; margin:0 auto; }
+        .logo-911 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:800; letter-spacing:-0.5px; margin-bottom:0.5rem; color:white; }
+        .logo-911 span { color:#4CAF50; }
+        .header-911-subtitle { font-size:1.1rem; opacity:0.85; font-weight:400; margin-bottom:1.5rem; }
+        .emergency-badge { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(183,28,28,0.9); padding:0.6rem 1.5rem; border-radius:50px; font-weight:600; font-size:0.95rem; letter-spacing:0.5px; color:white; }
+        .emergency-badge::before { content:'⚠'; font-size:1.1rem; }
+        .notice-container { max-width:820px; margin:0 auto; padding:2.5rem 1.5rem 4rem; }
+        .alert-box { background:var(--accent-light); border-left:5px solid var(--accent-red); padding:1.5rem 1.8rem; border-radius:0 12px 12px 0; margin-bottom:2.5rem; }
+        .alert-box h2 { font-family:'Playfair Display',serif; color:var(--accent-dark); font-size:1.3rem; margin-bottom:0.5rem; }
+        .alert-box p { color:var(--accent-dark); font-size:0.95rem; margin:0; }
+        .notice-section { background:var(--surface-911); border:1px solid var(--border); border-radius:16px; padding:2rem 2.2rem; margin-bottom:1.8rem; box-shadow:0 2px 12px rgba(0,0,0,0.04); transition:box-shadow 0.3s ease; }
+        .notice-section:hover { box-shadow:0 4px 20px rgba(0,0,0,0.08); }
+        .section-number { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; background:#2d7a3a; color:white; border-radius:50%; font-size:0.85rem; font-weight:700; margin-bottom:0.8rem; }
+        .notice-section h2 { font-family:'Playfair Display',serif; font-size:1.35rem; color:var(--text); margin-bottom:1rem; line-height:1.3; }
+        .notice-section p { color:var(--text-secondary); font-size:0.95rem; margin-bottom:0.8rem; }
+        .notice-section p:last-child { margin-bottom:0; }
+        .highlight { border-radius:10px; padding:1rem 1.3rem; margin-top:1rem; font-size:0.9rem; color:var(--text-secondary); }
+        .highlight strong { color:var(--text); }
+        .highlight-warning { background:var(--warning-bg); border:1px solid var(--warning-border); }
+        .highlight-green { background:var(--green-brand-light); border:1px solid var(--green-brand); }
+        .highlight-blue { background:#E8F5E9; border:1px solid #2d7a3a; }
+        .sticker-section { background:var(--surface-911); border:3px dashed var(--accent-red); border-radius:16px; padding:2rem; margin-bottom:1.8rem; text-align:center; }
+        .sticker-icon { font-size:2.5rem; margin-bottom:0.8rem; }
+        .sticker-section h2 { font-family:'Playfair Display',serif; color:var(--accent-red); font-size:1.4rem; margin-bottom:0.8rem; }
+        .sticker-section p { color:var(--text-secondary); font-size:0.95rem; max-width:500px; margin:0 auto; }
+        .sticker-url { display:inline-block; margin-top:1rem; color:#2d7a3a; font-weight:600; text-decoration:none; border-bottom:2px solid #2d7a3a; padding-bottom:2px; }
+        .tos-section { background:#1a2e1a; color:white; border-radius:16px; padding:2.5rem; margin-bottom:1.8rem; }
+        .tos-section h2 { font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:1.2rem; color:white; }
+        .tos-section h3 { font-size:0.85rem; font-weight:600; color:#EF5350; margin-top:1.5rem; margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.5px; }
+        .tos-section p { color:rgba(255,255,255,0.8); font-size:0.92rem; margin-bottom:0.8rem; line-height:1.8; }
+        .consent-section { background:var(--green-brand-light); border:2px solid var(--green-brand); border-radius:16px; padding:2rem 2.2rem; margin-bottom:1.8rem; text-align:center; }
+        .consent-section h2 { font-family:'Playfair Display',serif; color:var(--green-brand); font-size:1.3rem; margin-bottom:1rem; }
+        .consent-section p { color:var(--text-secondary); font-size:0.95rem; margin-bottom:1.2rem; }
+        .consent-buttons { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+        .btn-agree { background:var(--green-brand); color:white; border:none; padding:0.8rem 2.5rem; border-radius:50px; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.2s ease; }
+        .btn-agree:hover { background:#1B5E20; transform:translateY(-1px); }
+        .btn-decline { background:transparent; color:var(--text-secondary); border:2px solid var(--border); padding:0.8rem 2.5rem; border-radius:50px; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.2s ease; }
+        .btn-decline:hover { border-color:var(--accent-red); color:var(--accent-red); }
+        .contact-section-911 { text-align:center; padding:2rem; color:var(--text-secondary); font-size:0.9rem; }
+        .contact-section-911 a { color:#2d7a3a; text-decoration:none; font-weight:600; }
+        .reg-footer { text-align:center; padding:2rem; border-top:1px solid var(--border); color:var(--text-secondary); font-size:0.8rem; line-height:1.8; }
+        .reg-footer a { color:#2d7a3a; text-decoration:none; }
+        .reg-footer p { margin-bottom:0.4rem; }
+        @media (max-width:600px) { .header-911{padding:2rem 1.2rem;} .logo-911{font-size:1.8rem;} .notice-container{padding:1.5rem 1rem 3rem;} .notice-section{padding:1.5rem;} .tos-section{padding:1.5rem;} .consent-buttons{flex-direction:column;align-items:center;} }
+    </style>
 </head>
 <body>
 
-  <!-- ══════════ SITE NAVIGATION ══════════ -->
-  <header class="site-nav fixed top-0 z-50 w-full border-b border-white/5" style="background: rgba(12,18,34,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-      <!-- Logo -->
-      <a href="index.html" class="flex items-center gap-3 group" style="text-decoration: none;">
-        <div class="flex h-9 w-9 items-center justify-center rounded-lg shadow-lg transition-transform group-hover:scale-110" style="background: linear-gradient(135deg, #2d7a3a, #4CAF50);">
-          <span class="material-symbols-outlined text-white" style="font-size: 20px; font-variation-settings:'FILL' 1">cell_tower</span>
-        </div>
-        <span class="text-lg font-bold tracking-tight text-white">Sip<span style="color: #2d7a3a;">voip</span><span style="color: #4CAF50;">AI</span></span>
-      </a>
-
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-8">
-        <a class="nav-link text-base font-medium text-slate-400 hover:text-white transition-colors" href="index.html" style="text-decoration: none;">Home</a>
-        <div class="dropdown" style="padding-bottom:12px; margin-bottom:-12px;">
-          <button class="nav-link py-2 text-base font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-1" style="background: none; border: none; cursor: pointer;">
-            Solutions
-            <span class="material-symbols-outlined text-sm">expand_more</span>
-          </button>
-          <div class="dropdown-menu">
-            <a href="voip-solution.html" class="dropdown-item">
-              <div class="dropdown-icon" style="background: rgba(45,122,58,0.1); color: #2d7a3a;">
-                <span class="material-symbols-outlined text-xl">settings_phone</span>
-              </div>
-              <div>
-                <div class="text-sm font-semibold text-white">VoIP Solution</div>
-                <div class="text-xs text-slate-500">HD voice &amp; SIP trunking</div>
-              </div>
+    <header class="fixed top-0 z-50 w-full border-b border-white/5 bg-surface/70 backdrop-blur-xl">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/20 transition-transform group-hover:scale-110">
+                    <span class="material-symbols-outlined text-white text-xl" style="font-variation-settings:'FILL' 1">cell_tower</span>
+                </div>
+                <span class="text-lg font-bold tracking-tight text-white">Sip<span class="text-primary">voip</span><span class="text-accent">AI</span></span>
             </a>
-            <a href="ai-agent-solution.html" class="dropdown-item">
-              <div class="dropdown-icon" style="background: rgba(76,175,80,0.1); color: #4CAF50;">
-                <span class="material-symbols-outlined text-xl">smart_toy</span>
-              </div>
-              <div>
-                <div class="text-sm font-semibold text-white">AI Agent Solution</div>
-                <div class="text-xs text-slate-500">Intelligent call automation</div>
-              </div>
-            </a>
-            <a href="contact-center-solution.html" class="dropdown-item">
-              <div class="dropdown-icon" style="background: rgba(76,175,80,0.1); color: #4CAF50;">
-                <span class="material-symbols-outlined text-xl">support_agent</span>
-              </div>
-              <div>
-                <div class="text-sm font-semibold text-white">Contact Center</div>
-                <div class="text-xs text-slate-500">Omnichannel cloud platform</div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <a class="nav-link active text-base font-medium text-slate-400 hover:text-white transition-colors" href="contact.html" style="text-decoration: none;">Contact</a>
-      </nav>
-
-      <!-- CTA -->
-      <div class="flex items-center gap-3">
-        <a href="contact.html" class="btn-glow rounded-lg bg-primary px-5 py-2.5 text-base font-semibold text-white" style="text-decoration: none; background: #2d7a3a;">
-          Book a Demo
-        </a>
-        <button id="mobile-menu-toggle" class="md:hidden text-slate-400 hover:text-white" style="background: none; border: none; cursor: pointer;">
-          <span class="material-symbols-outlined text-2xl">menu</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="mobile-menu-911 hidden fixed inset-0 z-50 md:hidden" style="background: rgba(0,0,0,0.8); backdrop-filter: blur(4px);">
-    <div class="absolute right-0 top-0 h-full w-72 border-l border-white/5 shadow-2xl" style="background: #0c1222;">
-      <div class="flex items-center justify-between p-6 border-b border-white/5">
-        <span class="text-lg font-bold text-white">Menu</span>
-        <button id="mobile-menu-close" class="text-slate-400 hover:text-white" style="background: none; border: none; cursor: pointer;">
-          <span class="material-symbols-outlined text-2xl">close</span>
-        </button>
-      </div>
-      <nav class="flex flex-col p-6 space-y-5">
-        <a class="text-base font-medium text-slate-300 hover:text-primary transition-colors" href="index.html" style="text-decoration: none; color: #cbd5e1;">Home</a>
-        <div>
-          <button id="mobile-solutions-toggle" class="flex items-center justify-between w-full text-base font-medium text-slate-300 hover:text-primary transition-colors" style="background: none; border: none; cursor: pointer; color: #cbd5e1;">
-            Solutions
-            <span class="material-symbols-outlined text-sm" id="mobile-solutions-arrow">expand_more</span>
-          </button>
-          <div class="mobile-solutions-list" id="mobile-solutions-list">
-            <div class="pt-3 pl-4 space-y-3">
-              <a class="flex items-center gap-3 text-sm text-slate-400" href="voip-solution.html" style="text-decoration: none; color: #94a3b8;">
-                <span class="material-symbols-outlined text-lg" style="color: #2d7a3a;">settings_phone</span>
-                VoIP Solution
-              </a>
-              <a class="flex items-center gap-3 text-sm text-slate-400" href="ai-agent-solution.html" style="text-decoration: none; color: #94a3b8;">
-                <span class="material-symbols-outlined text-lg" style="color: #4CAF50;">smart_toy</span>
-                AI Agent Solution
-              </a>
-              <a class="flex items-center gap-3 text-sm text-slate-400" href="contact-center-solution.html" style="text-decoration: none; color: #94a3b8;">
-                <span class="material-symbols-outlined text-lg" style="color: #4CAF50;">support_agent</span>
-                Contact Center
-              </a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="nav-link text-base font-medium text-slate-400 hover:text-white transition-colors" href="index.html">Home</a>
+                <div class="dropdown" style="padding-bottom:12px;margin-bottom:-12px;">
+                    <button class="nav-link py-2 text-base font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+                        Solutions <span class="material-symbols-outlined text-sm">expand_more</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="voip-solution.html" class="dropdown-item">
+                            <div class="dropdown-icon bg-primary/10 text-primary"><span class="material-symbols-outlined text-xl">settings_phone</span></div>
+                            <div><div class="text-sm font-semibold text-white">VoIP Solution</div><div class="text-xs text-slate-500">HD voice &amp; SIP trunking</div></div>
+                        </a>
+                        <a href="ai-agent-solution.html" class="dropdown-item">
+                            <div class="dropdown-icon bg-accent/10 text-accent"><span class="material-symbols-outlined text-xl">smart_toy</span></div>
+                            <div><div class="text-sm font-semibold text-white">AI Agent Solution</div><div class="text-xs text-slate-500">Intelligent call automation</div></div>
+                        </a>
+                        <a href="contact-center-solution.html" class="dropdown-item">
+                            <div class="dropdown-icon bg-accent-green/10 text-accent-green"><span class="material-symbols-outlined text-xl">support_agent</span></div>
+                            <div><div class="text-sm font-semibold text-white">Contact Center</div><div class="text-xs text-slate-500">Omnichannel cloud platform</div></div>
+                        </a>
+                        <a href="website-creation-solution.html" class="dropdown-item">
+                            <div class="dropdown-icon bg-purple-500/10 text-purple-400"><span class="material-symbols-outlined text-xl">language</span></div>
+                            <div><div class="text-sm font-semibold text-white">Website Creation</div><div class="text-xs text-slate-500">Custom AI-powered websites</div></div>
+                        </a>
+                    </div>
+                </div>
+                <a class="nav-link text-base font-medium text-slate-400 hover:text-white transition-colors" href="contact.html">Contact</a>
+            </nav>
+            <div class="flex items-center gap-3">
+                <button class="hidden sm:block text-base font-medium text-slate-400 hover:text-white transition-colors px-4 py-2">Log in</button>
+                <a href="contact.html" class="btn-glow rounded-lg bg-primary px-5 py-2.5 text-base font-semibold text-white">Book a Demo</a>
+                <a href="mailto:info@sipvoipai.com" class="hidden lg:flex items-center gap-1.5 text-sm text-slate-400 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-sm">mail</span>info@sipvoipai.com
+                </a>
+                <a href="tel:+15144589062" class="hidden lg:flex items-center gap-1.5 text-sm text-slate-400 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-sm">call</span>+1 514-458-9062
+                </a>
+                <a href="tel:+14386096257" class="hidden xl:flex items-center gap-1.5 text-sm text-slate-400 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-sm">call</span>+1 438 609 6257
+                </a>
+                <button id="mobile-menu-toggle" class="md:hidden text-slate-400 hover:text-white">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
             </div>
-          </div>
         </div>
-        <a class="text-base font-medium text-slate-300" href="contact.html" style="text-decoration: none; color: #cbd5e1;">Contact</a>
-        <hr style="border-color: rgba(255,255,255,0.1);">
-        <a href="contact.html" class="btn-glow rounded-lg text-sm font-semibold text-white w-full text-center" style="background: #2d7a3a; text-decoration: none; padding: 0.75rem 1.25rem; border-radius: 8px; display: block;">Book a Demo</a>
-      </nav>
-    </div>
-  </div>
+    </header>
 
-  <!-- ══════════ 911 NOTICE CONTENT ══════════ -->
-  <div class="notice-page" style="padding-top: 73px;">
-
-    <!-- 911 Emergency Header -->
-    <div class="header-911">
-      <div class="header-911-content">
-        <div class="logo-911">Sip<span>voipAI</span></div>
-        <p class="header-911-subtitle">Cloud Telephony Services — Montreal, QC</p>
-        <div class="emergency-badge">VoIP 9-1-1 Emergency Service Information</div>
-      </div>
-    </div>
-
-    <div class="notice-container">
-
-      <!-- Alert -->
-      <div class="alert-box">
-        <h2>Important Notice</h2>
-        <p>VoIP 9-1-1 emergency service is different from traditional telephone 9-1-1 services. Please read this page carefully to understand the differences and limitations that apply to your SipvoipAI service.</p>
-      </div>
-
-      <!-- Section 1 -->
-      <div class="notice-section">
-        <div class="section-number">1</div>
-        <h2>Differences Between Traditional 9-1-1 and VoIP 9-1-1</h2>
-        <p>With traditional phone services, your 9-1-1 call is sent directly to the nearest emergency response centre (PSAP). The operator automatically receives your name, address, and phone number.</p>
-        <p>With SipvoipAI VoIP service, your 9-1-1 call is forwarded to a third-party service provider (Northern911) that will automatically or manually route your call to the appropriate emergency response centre. Due to the nature of VoIP technology, the emergency operator <strong>may not automatically have your name, location, or contact information</strong>.</p>
-      </div>
-
-      <!-- Section 2 -->
-      <div class="notice-section">
-        <div class="section-number">2</div>
-        <h2>You Must Provide Your Location</h2>
-        <p>Because you can move your VoIP phone between locations and because, for technical reasons, the emergency operator may not have your name, location, or contact information available, you must <strong>immediately inform the emergency operator of your location and contact particulars</strong> any time you call 9-1-1.</p>
-        <div class="highlight highlight-warning">
-          <strong>Do not risk sending police or ambulance services to the wrong location.</strong> Always confirm your physical address with the dispatcher when calling 9-1-1.
-        </div>
-      </div>
-
-      <!-- Section 3 -->
-      <div class="notice-section">
-        <div class="section-number">3</div>
-        <h2>Service Interruptions</h2>
-        <p>VoIP phone service depends on your Internet connectivity and electrical power to function. In the event of power, network, or Internet outages (including congestion), or if your service is disconnected or suspended due to non-payment, <strong>you may experience a failure, disruption, or delay in your 9-1-1 service</strong>.</p>
-        <div class="highlight highlight-green">
-          <strong>Recommendation:</strong> Keep an alternative phone service (such as a cellular telephone) handy to increase the reliability of your access to emergency services during any service interruption.
-        </div>
-      </div>
-
-      <!-- Section 4 -->
-      <div class="notice-section">
-        <div class="section-number">4</div>
-        <h2>Do Not Disconnect</h2>
-        <p>Until you are told to do so by an emergency dispatcher, <strong>do not disconnect your 9-1-1 call</strong>. The dispatcher may not have your number or contact information. If you are inadvertently disconnected, call back immediately.</p>
-      </div>
-
-      <!-- Section 5 -->
-      <div class="notice-section">
-        <div class="section-number">5</div>
-        <h2>Keep Your Service Address Up to Date</h2>
-        <p>SipvoipAI will attempt to provide the emergency operator with your registered service address. Please ensure that your information on file with us is <strong>always accurate and updated</strong>.</p>
-        <p>If you do not update your address (for example, if you are unable to speak during a 9-1-1 call), the emergency operator may assume that you are calling from the last registered address on file.</p>
-        <div class="highlight highlight-blue">
-          <strong>Update your address online:</strong> You can update your physical address at any time through your SipvoipAI account portal or by contacting our support team at <a href="mailto:info@sipvoipai.com" style="color: #2d7a3a;">info@sipvoipai.com</a>.
-        </div>
-      </div>
-
-      <!-- Section 6 -->
-      <div class="notice-section">
-        <div class="section-number">6</div>
-        <h2>When 9-1-1 Calls May Not Function</h2>
-        <p>For technical reasons, the functionality of VoIP 9-1-1 emergency calls may cease or be curtailed in various circumstances, including but not limited to:</p>
-        <p>• Failure of service or your system access equipment<br>
-           • Power outages at your location<br>
-           • VoIP service outage, suspension, or disconnection due to billing issues<br>
-           • Network or Internet congestion or outage<br>
-           • If you need to reset or reconfigure your equipment<br>
-           • If you move your equipment to a location other than the address registered with SipvoipAI</p>
-      </div>
-
-      <!-- Section 7 -->
-      <div class="notice-section">
-        <div class="section-number">7</div>
-        <h2>Inform Other Users</h2>
-        <p>You must notify members of your household and other potential users of your SipvoipAI VoIP service of the nature and limitations of 9-1-1 emergency calls. To make this easier, attach the provided stickers in a visible location on your telephone sets.</p>
-      </div>
-
-      <!-- Sticker -->
-      <div class="sticker-section">
-        <div class="sticker-icon">📋</div>
-        <h2>ATTENTION — Telephone Set Notice</h2>
-        <p>When dialing 9-1-1, be prepared to provide your address/location.</p>
-        <a href="911-notice.html" class="sticker-url">sipvoipai.com/911</a>
-      </div>
-
-      <!-- Terms of Service -->
-      <div class="tos-section">
-        <h2>Terms of Service — 9-1-1 Provisions</h2>
-
-        <h3>Description</h3>
-        <p>SipvoipAI VoIP services allow you to make or receive telephone calls over the Internet to or from the public switched telephone network. The nature of VoIP telephone calls, while appearing similar to traditional telephone calling services, create unique limitations and circumstances. You acknowledge and agree that differences exist between traditional telephone service and VoIP telephone services, including the lack of traditional 9-1-1 emergency services.</p>
-
-        <h3>Placing 9-1-1 Calls</h3>
-        <p>When you make a 9-1-1 emergency call, the VoIP service will attempt to automatically route your 9-1-1 call through Northern911 to the Public Safety Answering Point ("PSAP") corresponding to your address of record on your account. However, due to the limitations of the VoIP telephone services, your 9-1-1 call may be routed to a different location than that which would be used for traditional 9-1-1 dialling. You may be required to provide your name, address, and telephone number to the call centre.</p>
-
-        <h3>How Your Information Is Provided</h3>
-        <p>The VoIP service will attempt to automatically provide the PSAP dispatcher or emergency service operator with the name, address, and telephone number associated with your account. However, for technical reasons, the dispatcher receiving the call may not be able to capture or retain your name, phone number, or physical location. Therefore, when making a 9-1-1 emergency call, you must immediately inform the dispatcher of your location.</p>
-
-        <h3>Correctness of Information</h3>
-        <p>You are responsible for providing, maintaining, and updating correct contact information (including name, residential address, and telephone number) with your account. If you do not correctly identify the actual location where you are located, or if your account information has recently changed or has otherwise not been updated, 9-1-1 calls may be misdirected to an incorrect emergency response site.</p>
-
-        <h3>Connection Time</h3>
-        <p>For technical reasons, including network congestion, it is possible that a 9-1-1 emergency call will produce a busy signal or will take longer to connect when compared with traditional 9-1-1 calls.</p>
-
-        <h3>Alternate Services</h3>
-        <p>If you are not comfortable with the limitations of 9-1-1 emergency calls, SipvoipAI recommends that you terminate the VoIP services or consider an alternate means for accessing traditional 9-1-1 emergency services.</p>
-
-        <h3>Limitations of Liability</h3>
-        <p>SipvoipAI provides VoIP 9-1-1 service through Northern911, a CRTC-designated intermediary. Due to the nature of VoIP technology, 9-1-1 service may have limitations including but not limited to: service interruption during power or Internet outages, potential routing to incorrect PSAP if customer address is not up to date, and delays in call transfer compared to traditional landline 9-1-1. SipvoipAI shall not be liable for any damages arising from 9-1-1 service limitations inherent to VoIP technology. Customers are responsible for maintaining an accurate physical address in their account. Please review SipvoipAI's complete Terms of Service for full details on limitations of liability.</p>
-      </div>
-
-      <!-- Customer Consent -->
-      <div class="consent-section">
-        <h2>Customer Acknowledgment &amp; Consent</h2>
-        <p>I agree that I have read and understand the 9-1-1 service limitations described above. I acknowledge that VoIP 9-1-1 emergency service is different from traditional 9-1-1 service and that I accept these limitations.</p>
-        <div class="consent-buttons">
-          <button class="btn-agree" onclick="alert('Thank you for your acknowledgment. Your consent has been recorded.')">I Agree</button>
-          <button class="btn-decline" onclick="alert('Service activation cannot proceed without 9-1-1 consent acknowledgment.')">I Do Not Agree</button>
-        </div>
-      </div>
-
-      <!-- Contact -->
-      <div class="contact-section-911">
-        <p>Questions about our 9-1-1 service? Contact us at <a href="mailto:info@sipvoipai.com">info@sipvoipai.com</a> or call <a href="tel:+15144589062">+1 514-458-9062</a></p>
-        <p style="margin-top: 0.5rem;">SipvoipAI — Montréal, QC, Canada</p>
-      </div>
-
-      <!-- Regulatory Footer -->
-      <div class="reg-footer">
-        <p>This page is published in compliance with CRTC Telecom Decisions <a href="https://crtc.gc.ca/eng/archive/2005/dt2005-21.htm">2005-21</a>, <a href="https://crtc.gc.ca/eng/archive/2005/dt2005-61.htm">2005-61</a>, and <a href="https://crtc.gc.ca/eng/archive/2007/dt2007-44.htm">2007-44</a>.</p>
-        <p>SipvoipAI is registered with the Canadian Radio-television and Telecommunications Commission (CRTC) as a reseller of telecommunications services (SP 3510).</p>
-        <p>9-1-1 emergency call routing is provided by Northern911, a CRTC-designated intermediary.</p>
-        <p style="margin-top: 1rem;">© 2025 SipvoipAI Inc. All rights reserved.</p>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ══════════ SITE FOOTER ══════════ -->
-  <footer class="site-footer border-t border-white/5 bg-surface px-6 py-14">
-    <div class="mx-auto max-w-7xl">
-      <div class="grid grid-cols-2 gap-12 md:grid-cols-4 lg:grid-cols-5">
-        <div class="col-span-2 lg:col-span-1">
-          <div class="mb-5 flex items-center gap-2">
-            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent">
-              <span class="material-symbols-outlined text-white text-lg" style="font-variation-settings:'FILL' 1">cell_tower</span>
+    <div id="mobile-menu" class="mobile-menu hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm md:hidden">
+        <div class="absolute right-0 top-0 h-full w-72 bg-surface border-l border-white/5 shadow-2xl">
+            <div class="flex items-center justify-between p-6 border-b border-white/5">
+                <span class="text-lg font-bold text-white">Menu</span>
+                <button id="mobile-menu-close" class="text-slate-400 hover:text-white"><span class="material-symbols-outlined text-2xl">close</span></button>
             </div>
-            <span class="text-base font-bold text-white">Sip<span class="text-primary">voip</span><span class="text-accent">AI</span></span>
-          </div>
-          <p class="text-sm leading-relaxed text-slate-500 mb-1">AI-Powered Business Communication Systems</p>
-          <p class="text-xs text-slate-600">Digital Communication Experts</p>
+            <nav class="flex flex-col p-6 space-y-5">
+                <a class="nav-link text-base font-medium text-slate-300 hover:text-primary transition-colors" href="index.html">Home</a>
+                <div>
+                    <button id="mobile-solutions-toggle" class="flex items-center justify-between w-full text-base font-medium text-slate-300 hover:text-primary transition-colors">
+                        Solutions <span class="material-symbols-outlined text-sm transition-transform" id="mobile-solutions-arrow">expand_more</span>
+                    </button>
+                    <div class="mobile-solutions-list" id="mobile-solutions-list">
+                        <div class="pt-3 pl-4 space-y-3">
+                            <a class="flex items-center gap-3 text-sm text-slate-400 hover:text-primary transition-colors" href="voip-solution.html"><span class="material-symbols-outlined text-primary text-lg">settings_phone</span>VoIP Solution</a>
+                            <a class="flex items-center gap-3 text-sm text-slate-400 hover:text-accent transition-colors" href="ai-agent-solution.html"><span class="material-symbols-outlined text-accent text-lg">smart_toy</span>AI Agent Solution</a>
+                            <a class="flex items-center gap-3 text-sm text-slate-400 hover:text-accent-green transition-colors" href="contact-center-solution.html"><span class="material-symbols-outlined text-accent-green text-lg">support_agent</span>Contact Center</a>
+                            <a class="flex items-center gap-3 text-sm text-slate-400 hover:text-purple-400 transition-colors" href="website-creation-solution.html"><span class="material-symbols-outlined text-purple-400 text-lg">language</span>Website Creation</a>
+                        </div>
+                    </div>
+                </div>
+                <a class="nav-link text-base font-medium text-slate-300 hover:text-primary transition-colors" href="contact.html">Contact</a>
+                <hr class="border-white/10"/>
+                <a href="contact.html" class="btn-glow rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white w-full text-center">Book a Demo</a>
+            </nav>
         </div>
-        <div>
-          <h5 class="mb-4 text-sm font-bold text-white">Solutions</h5>
-          <ul class="space-y-2.5 text-sm text-slate-500">
-            <li><a class="hover:text-primary transition-colors" href="voip-solution.html">VoIP Solution</a></li>
-            <li><a class="hover:text-primary transition-colors" href="ai-agent-solution.html">AI Agent Solution</a></li>
-            <li><a class="hover:text-primary transition-colors" href="contact-center-solution.html">Contact Center</a></li>
-            <li><a class="hover:text-primary transition-colors" href="#">API Docs</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 class="mb-4 text-sm font-bold text-white">Company</h5>
-          <ul class="space-y-2.5 text-sm text-slate-500">
-            <li><a class="hover:text-primary transition-colors" href="#">About</a></li>
-            <li><a class="hover:text-primary transition-colors" href="contact.html">Contact</a></li>
-            <li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
-            <li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 class="mb-4 text-sm font-bold text-white">Contact</h5>
-          <ul class="space-y-2.5 text-sm text-slate-500">
-            <li><a class="hover:text-primary transition-colors" href="mailto:info@sipvoipai.com">info@sipvoipai.com</a></li>
-            <li><a class="hover:text-primary transition-colors" href="tel:+15144589062">+1 514-458-9062</a></li>
-            <li><a class="hover:text-primary transition-colors" href="tel:+14386096257">+1 438 609 6257</a></li>
-            <li><span>Montreal, Canada</span></li>
-          </ul>
-        </div>
-        <div>
-          <h5 class="mb-4 text-sm font-bold text-white">Legal</h5>
-          <ul class="space-y-2.5 text-sm text-slate-500">
-            <li><a class="hover:text-primary transition-colors" href="#">Privacy</a></li>
-            <li><a class="hover:text-primary transition-colors" href="#">Terms</a></li>
-            <li><a class="hover:text-primary transition-colors" href="#">Security</a></li>
-            <li><a class="hover:text-primary transition-colors" href="911-notice.html" style="color: #2d7a3a; font-weight: 600;">911 Notice</a></li>
-          </ul>
+    </div>
+
+    <div class="notice-page" style="padding-top: 73px;">
+      <div class="header-911">
+        <div class="header-911-content">
+          <div class="logo-911">Sip<span>voipAI</span></div>
+          <p class="header-911-subtitle">Cloud Telephony Services — Montreal, QC</p>
+          <div class="emergency-badge">VoIP 9-1-1 Emergency Service Information</div>
         </div>
       </div>
-      <div class="mt-14 border-t border-white/5 pt-8 space-y-2 text-center">
-        <p class="text-xs text-slate-500">Powered by Cisco BroadWorks &amp; Uboss Platform</p>
-        <p class="text-xs text-slate-600">© 2025 SipvoipAI Inc. All rights reserved.</p>
+      <div class="notice-container">
+        <div class="alert-box">
+          <h2>Important Notice</h2>
+          <p>VoIP 9-1-1 emergency service is different from traditional telephone 9-1-1 services. Please read this page carefully to understand the differences and limitations that apply to your SipvoipAI service.</p>
+        </div>
+        <div class="notice-section">
+          <div class="section-number">1</div>
+          <h2>Differences Between Traditional 9-1-1 and VoIP 9-1-1</h2>
+          <p>With traditional phone services, your 9-1-1 call is sent directly to the nearest emergency response centre (PSAP). The operator automatically receives your name, address, and phone number.</p>
+          <p>With SipvoipAI VoIP service, your 9-1-1 call is forwarded to a third-party service provider (Northern911) that will automatically or manually route your call to the appropriate emergency response centre. Due to the nature of VoIP technology, the emergency operator <strong>may not automatically have your name, location, or contact information</strong>.</p>
+        </div>
+        <div class="notice-section">
+          <div class="section-number">2</div>
+          <h2>You Must Provide Your Location</h2>
+          <p>Because you can move your VoIP phone between locations and because, for technical reasons, the emergency operator may not have your name, location, or contact information available, you must <strong>immediately inform the emergency operator of your location and contact particulars</strong> any time you call 9-1-1.</p>
+          <div class="highlight highlight-warning"><strong>Do not risk sending police or ambulance services to the wrong location.</strong> Always confirm your physical address with the dispatcher when calling 9-1-1.</div>
+        </div>
+        <div class="notice-section">
+          <div class="section-number">3</div>
+          <h2>Service Interruptions</h2>
+          <p>VoIP phone service depends on your Internet connectivity and electrical power to function. In the event of power, network, or Internet outages (including congestion), or if your service is disconnected or suspended due to non-payment, <strong>you may experience a failure, disruption, or delay in your 9-1-1 service</strong>.</p>
+          <div class="highlight highlight-green"><strong>Recommendation:</strong> Keep an alternative phone service (such as a cellular telephone) handy to increase the reliability of your access to emergency services during any service interruption.</div>
+        </div>
+        <div class="notice-section">
+          <div class="section-number">4</div>
+          <h2>Do Not Disconnect</h2>
+          <p>Until you are told to do so by an emergency dispatcher, <strong>do not disconnect your 9-1-1 call</strong>. The dispatcher may not have your number or contact information. If you are inadvertently disconnected, call back immediately.</p>
+        </div>
+        <div class="notice-section">
+          <div class="section-number">5</div>
+          <h2>Keep Your Service Address Up to Date</h2>
+          <p>SipvoipAI will attempt to provide the emergency operator with your registered service address. Please ensure that your information on file with us is <strong>always accurate and updated</strong>.</p>
+          <p>If you do not update your address (for example, if you are unable to speak during a 9-1-1 call), the emergency operator may assume that you are calling from the last registered address on file.</p>
+          <div class="highlight highlight-blue"><strong>Update your address online:</strong> You can update your physical address at any time through your SipvoipAI account portal or by contacting our support team at <a href="mailto:info@sipvoipai.com" style="color:#2d7a3a;">info@sipvoipai.com</a>.</div>
+        </div>
+        <div class="notice-section">
+          <div class="section-number">6</div>
+          <h2>When 9-1-1 Calls May Not Function</h2>
+          <p>For technical reasons, the functionality of VoIP 9-1-1 emergency calls may cease or be curtailed in various circumstances, including but not limited to:</p>
+          <p>• Failure of service or your system access equipment<br>• Power outages at your location<br>• VoIP service outage, suspension, or disconnection due to billing issues<br>• Network or Internet congestion or outage<br>• If you need to reset or reconfigure your equipment<br>• If you move your equipment to a location other than the address registered with SipvoipAI</p>
+        </div>
+        <div class="notice-section">
+          <div class="section-number">7</div>
+          <h2>Inform Other Users</h2>
+          <p>You must notify members of your household and other potential users of your SipvoipAI VoIP service of the nature and limitations of 9-1-1 emergency calls. To make this easier, attach the provided stickers in a visible location on your telephone sets.</p>
+        </div>
+        <div class="sticker-section">
+          <div class="sticker-icon">📋</div>
+          <h2>ATTENTION — Telephone Set Notice</h2>
+          <p>When dialing 9-1-1, be prepared to provide your address/location.</p>
+          <a href="911-notice.html" class="sticker-url">sipvoipai.com/911</a>
+        </div>
+        <div class="tos-section">
+          <h2>Terms of Service — 9-1-1 Provisions</h2>
+          <h3>Description</h3>
+          <p>SipvoipAI VoIP services allow you to make or receive telephone calls over the Internet to or from the public switched telephone network. The nature of VoIP telephone calls, while appearing similar to traditional telephone calling services, create unique limitations and circumstances. You acknowledge and agree that differences exist between traditional telephone service and VoIP telephone services, including the lack of traditional 9-1-1 emergency services.</p>
+          <h3>Placing 9-1-1 Calls</h3>
+          <p>When you make a 9-1-1 emergency call, the VoIP service will attempt to automatically route your 9-1-1 call through Northern911 to the Public Safety Answering Point ("PSAP") corresponding to your address of record on your account. However, due to the limitations of the VoIP telephone services, your 9-1-1 call may be routed to a different location than that which would be used for traditional 9-1-1 dialling. You may be required to provide your name, address, and telephone number to the call centre.</p>
+          <h3>How Your Information Is Provided</h3>
+          <p>The VoIP service will attempt to automatically provide the PSAP dispatcher or emergency service operator with the name, address, and telephone number associated with your account. However, for technical reasons, the dispatcher receiving the call may not be able to capture or retain your name, phone number, or physical location. Therefore, when making a 9-1-1 emergency call, you must immediately inform the dispatcher of your location.</p>
+          <h3>Correctness of Information</h3>
+          <p>You are responsible for providing, maintaining, and updating correct contact information (including name, residential address, and telephone number) with your account. If you do not correctly identify the actual location where you are located, or if your account information has recently changed or has otherwise not been updated, 9-1-1 calls may be misdirected to an incorrect emergency response site.</p>
+          <h3>Connection Time</h3>
+          <p>For technical reasons, including network congestion, it is possible that a 9-1-1 emergency call will produce a busy signal or will take longer to connect when compared with traditional 9-1-1 calls.</p>
+          <h3>Alternate Services</h3>
+          <p>If you are not comfortable with the limitations of 9-1-1 emergency calls, SipvoipAI recommends that you terminate the VoIP services or consider an alternate means for accessing traditional 9-1-1 emergency services.</p>
+          <h3>Limitations of Liability</h3>
+          <p>SipvoipAI provides VoIP 9-1-1 service through Northern911, a CRTC-designated intermediary. Due to the nature of VoIP technology, 9-1-1 service may have limitations including but not limited to: service interruption during power or Internet outages, potential routing to incorrect PSAP if customer address is not up to date, and delays in call transfer compared to traditional landline 9-1-1. SipvoipAI shall not be liable for any damages arising from 9-1-1 service limitations inherent to VoIP technology. Customers are responsible for maintaining an accurate physical address in their account. Please review SipvoipAI's complete Terms of Service for full details on limitations of liability.</p>
+        </div>
+        <div class="consent-section">
+          <h2>Customer Acknowledgment &amp; Consent</h2>
+          <p>I agree that I have read and understand the 9-1-1 service limitations described above. I acknowledge that VoIP 9-1-1 emergency service is different from traditional 9-1-1 service and that I accept these limitations.</p>
+          <div class="consent-buttons">
+            <button class="btn-agree" onclick="alert('Thank you for your acknowledgment. Your consent has been recorded.')">I Agree</button>
+            <button class="btn-decline" onclick="alert('Service activation cannot proceed without 9-1-1 consent acknowledgment.')">I Do Not Agree</button>
+          </div>
+        </div>
+        <div class="contact-section-911">
+          <p>Questions about our 9-1-1 service? Contact us at <a href="mailto:info@sipvoipai.com">info@sipvoipai.com</a> or call <a href="tel:+15144589062">+1 514-458-9062</a></p>
+          <p style="margin-top:0.5rem;">SipvoipAI — Montréal, QC, Canada</p>
+        </div>
+        <div class="reg-footer">
+          <p>This page is published in compliance with CRTC Telecom Decisions <a href="https://crtc.gc.ca/eng/archive/2005/dt2005-21.htm">2005-21</a>, <a href="https://crtc.gc.ca/eng/archive/2005/dt2005-61.htm">2005-61</a>, and <a href="https://crtc.gc.ca/eng/archive/2007/dt2007-44.htm">2007-44</a>.</p>
+          <p>SipvoipAI is registered with the Canadian Radio-television and Telecommunications Commission (CRTC) as a reseller of telecommunications services (SP 3510).</p>
+          <p>9-1-1 emergency call routing is provided by Northern911, a CRTC-designated intermediary.</p>
+          <p style="margin-top:1rem;">© 2025 SipvoipAI Inc. All rights reserved.</p>
+        </div>
       </div>
     </div>
-  </footer>
 
-  <!-- ElevenLabs AI Voice Agent Widget -->
-  <elevenlabs-convai agent-id="agent_0001khqe7s3hfka9c4fqfpx7ffvv"></elevenlabs-convai>
-  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+    <footer class="border-t border-white/5 bg-surface px-6 py-14">
+        <div class="mx-auto max-w-7xl">
+            <div class="grid grid-cols-2 gap-12 md:grid-cols-4 lg:grid-cols-5">
+                <div class="col-span-2 lg:col-span-1">
+                    <div class="mb-5 flex items-center gap-2">
+                        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent">
+                            <span class="material-symbols-outlined text-white text-lg" style="font-variation-settings:'FILL' 1">cell_tower</span>
+                        </div>
+                        <span class="text-base font-bold text-white">Sip<span class="text-primary">voip</span><span class="text-accent">AI</span></span>
+                    </div>
+                    <p class="text-sm leading-relaxed text-slate-500 mb-1">AI-Powered Business Communication Systems</p>
+                    <p class="text-xs text-slate-600">Digital Communication Experts</p>
+                </div>
+                <div>
+                    <h5 class="mb-4 text-sm font-bold text-white">Solutions</h5>
+                    <ul class="space-y-2.5 text-sm text-slate-500">
+                        <li><a class="hover:text-primary transition-colors" href="voip-solution.html">VoIP Solution</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="ai-agent-solution.html">AI Agent Solution</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="contact-center-solution.html">Contact Center</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="website-creation-solution.html">Website Creation</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">API Docs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="mb-4 text-sm font-bold text-white">Company</h5>
+                    <ul class="space-y-2.5 text-sm text-slate-500">
+                        <li><a class="hover:text-primary transition-colors" href="#">About</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="contact.html">Contact</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="mb-4 text-sm font-bold text-white">Contact</h5>
+                    <ul class="space-y-2.5 text-sm text-slate-500">
+                        <li><a class="hover:text-primary transition-colors" href="mailto:info@sipvoipai.com">info@sipvoipai.com</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="tel:+15144589062">+1 514-458-9062</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="tel:+14386096257">+1 438 609 6257</a></li>
+                        <li><span>Montreal, Canada</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="mb-4 text-sm font-bold text-white">Legal</h5>
+                    <ul class="space-y-2.5 text-sm text-slate-500">
+                        <li><a class="hover:text-primary transition-colors" href="#">Privacy</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Terms</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Security</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="911-notice.html">911 Notice</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-14 border-t border-white/5 pt-8 space-y-2 text-center">
+                <p class="text-xs text-slate-500">Powered by Cisco BroadWorks &amp; Uboss Platform</p>
+                <p class="text-xs text-slate-600">© 2025 SipvoipAI Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-  <script src="assets/js/main.js"></script>
-  <script>
+<elevenlabs-convai agent-id="agent_0001khqe7s3hfka9c4fqfpx7ffvv"></elevenlabs-convai>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Mobile menu
-      const toggle = document.getElementById('mobile-solutions-toggle');
-      const list = document.getElementById('mobile-solutions-list');
-      const arrow = document.getElementById('mobile-solutions-arrow');
-      if (toggle && list) {
-        toggle.addEventListener('click', function() {
-          list.classList.toggle('open');
-          if (arrow) arrow.style.transform = list.classList.contains('open') ? 'rotate(180deg)' : '';
-        });
-      }
+        const toggle = document.getElementById('mobile-solutions-toggle');
+        const list = document.getElementById('mobile-solutions-list');
+        const arrow = document.getElementById('mobile-solutions-arrow');
+        if (toggle && list) {
+            toggle.addEventListener('click', function() {
+                list.classList.toggle('open');
+                if (arrow) arrow.style.transform = list.classList.contains('open') ? 'rotate(180deg)' : '';
+            });
+        }
     });
-  </script>
+</script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
