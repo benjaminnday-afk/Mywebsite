@@ -1,973 +1,220 @@
-﻿<!DOCTYPE html>
-<html class="dark" lang="en">
+<!doctype html>
+<html lang="fr">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="SipvoipAI — AI-Powered Business Communication Systems. Cloud Phone Systems (BroadWorks), Cisco Webex Integration, AI Call Automation and Smart AI Receptionist for modern businesses."/>
-    <meta name="keywords" content="SIP, VoIP, AI, telecom, BroadWorks, Cisco Webex, cloud phone system, AI receptionist, Montreal"/>
-    <title>SipvoipAI — AI-Powered Business Communication Systems</title>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#2d7a3a",
-                        "primary-dark": "#1a5c27",
-                        "accent": "#4CAF50",
-                        "accent-green": "#4CAF50",
-                        "surface": "#0c1222",
-                        "surface-light": "#111b2e",
-                        "surface-card": "#152038",
-                    },
-                    fontFamily: {
-                        "display": ["Outfit", "sans-serif"],
-                        "mono": ["JetBrains Mono", "monospace"],
-                    },
-                },
-            },
-        }
-    </script>
-    
-    <style>
-        *, *::before, *::after { box-sizing: border-box; }
-        body { font-family: 'Outfit', sans-serif; background: #0c1222; color: #e2e8f0; overflow-x: hidden; }
-        
-        /* ── Hero background ── */
-        .hero-bg {
-            background: 
-                radial-gradient(ellipse 80% 60% at 50% 40%, rgba(45,122,58,0.12) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 40% at 80% 20%, rgba(76,175,80,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse 40% 50% at 20% 60%, rgba(76,175,80,0.06) 0%, transparent 60%);
-        }
-        
-        /* ── Grid pattern ── */
-        .grid-pattern {
-            background-image: 
-                linear-gradient(rgba(45,122,58,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(45,122,58,0.04) 1px, transparent 1px);
-            background-size: 48px 48px;
-        }
-        
-        /* ── Glow orbs ── */
-        .orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
-        .orb-1 { width: 400px; height: 400px; background: rgba(45,122,58,0.15); top: -100px; left: -100px; animation: float 8s ease-in-out infinite; }
-        .orb-2 { width: 300px; height: 300px; background: rgba(76,175,80,0.1); bottom: 10%; right: -80px; animation: float 10s ease-in-out infinite reverse; }
-        .orb-3 { width: 250px; height: 250px; background: rgba(76,175,80,0.08); top: 40%; left: 60%; animation: float 12s ease-in-out infinite 2s; }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -20px) scale(1.05); }
-            66% { transform: translate(-20px, 15px) scale(0.95); }
-        }
-        
-        /* ── Staggered fade-in ── */
-        .hero-enter { opacity: 0; transform: translateY(32px); animation: heroIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .hero-enter-1 { animation-delay: 0.1s; }
-        .hero-enter-2 { animation-delay: 0.25s; }
-        .hero-enter-3 { animation-delay: 0.4s; }
-        .hero-enter-4 { animation-delay: 0.55s; }
-        .hero-enter-5 { animation-delay: 0.7s; }
-        
-        @keyframes heroIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* ── Scroll reveal ── */
-        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
-        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
-        
-        /* ── Buttons ── */
-        .btn-glow {
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .btn-glow::after {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: inherit;
-            background: linear-gradient(135deg, #2d7a3a, #4CAF50, #4CAF50);
-            z-index: -1;
-            opacity: 0;
-            filter: blur(12px);
-            transition: opacity 0.3s;
-        }
-        .btn-glow:hover::after { opacity: 0.6; }
-        .btn-glow:hover { transform: translateY(-2px); }
-        .btn-glow:active { transform: translateY(0); }
-        
-        /* ── Card hover ── */
-        .card-lift {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .card-lift:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 60px -15px rgba(45,122,58,0.2);
-            border-color: rgba(45,122,58,0.4);
-        }
-        
-        /* ── Dashboard mockup ── */
-        .dashboard-glow {
-            box-shadow: 
-                0 0 0 1px rgba(45,122,58,0.15),
-                0 25px 80px -12px rgba(45,122,58,0.25),
-                0 0 120px -30px rgba(76,175,80,0.15);
-        }
-        
-        /* ── Typing cursor ── */
-        .cursor-blink::after {
-            content: '|';
-            animation: blink 1s step-end infinite;
-            color: #4CAF50;
-            margin-left: 2px;
-        }
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-        
-        /* ── Pulse dot ── */
-        .live-dot { width: 8px; height: 8px; background: #4CAF50; border-radius: 50%; position: relative; }
-        .live-dot::after { content:''; position:absolute; inset:-3px; border-radius:50%; border:2px solid rgba(76,175,80,0.4); animation: ping 1.5s cubic-bezier(0,0,0.2,1) infinite; }
-        @keyframes ping { 75%,100%{transform:scale(2);opacity:0} }
-        
-        /* ── Stat counter animation ── */
-        .stat-bar { height: 100%; border-radius: 3px 3px 0 0; transform-origin: bottom; animation: growBar 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; transform: scaleY(0); }
-        @keyframes growBar { to { transform: scaleY(1); } }
-        
-        /* ── Scrollbar ── */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0c1222; }
-        ::-webkit-scrollbar-thumb { background: #1a3a1f; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #2d7a3a; }
-        
-        /* ── Nav active ── */
-        .nav-link.active { color: #2d7a3a !important; }
-        .nav-link.active::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:2px; background: linear-gradient(90deg,#2d7a3a,#4CAF50); border-radius: 1px; }
-        .nav-link { position: relative; }
-
-        /* ── Smooth scroll ── */
-        html { scroll-behavior: smooth; }
-
-        /* ── Mobile menu ── */
-        .mobile-menu { transition: opacity 0.3s; }
-        .mobile-menu.hidden { opacity: 0; pointer-events: none; }
-        .mobile-menu.visible { opacity: 1; pointer-events: all; }
-
-        /* ── Solutions dropdown ── */
-        .dropdown { position: relative; }
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(0);
-            min-width: 260px;
-            background: #111b2e;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 8px;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 20px 60px -15px rgba(0,0,0,0.5);
-            z-index: 100;
-        }
-        .dropdown-menu::before {
-            content: '';
-            position: absolute;
-            top: -16px;
-            left: 0;
-            right: 0;
-            height: 16px;
-            background: transparent;
-        }
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateX(-50%) translateY(0);
-        }
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            transition: background 0.2s;
-            text-decoration: none;
-        }
-        .dropdown-item:hover {
-            background: rgba(45,122,58,0.1);
-        }
-        .dropdown-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        /* ── Mobile solutions accordion ── */
-        .mobile-solutions-list {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        .mobile-solutions-list.open {
-            max-height: 300px;
-        }
-
-        /* ── Logo ticker ── */
-        .ticker-wrap {
-            overflow: hidden;
-            position: relative;
-        }
-        .ticker-wrap::before,
-        .ticker-wrap::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 120px;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .ticker-wrap::before {
-            left: 0;
-            background: linear-gradient(to right, #0c1222, transparent);
-        }
-        .ticker-wrap::after {
-            right: 0;
-            background: linear-gradient(to left, #0c1222, transparent);
-        }
-        .ticker-track {
-            display: flex;
-            gap: 64px;
-            align-items: center;
-            animation: tickerScroll 30s linear infinite;
-            width: max-content;
-        }
-        @keyframes tickerScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .ticker-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-            opacity: 1;
-            transition: opacity 0.3s;
-            white-space: nowrap;
-        }
-        .ticker-item:hover {
-            opacity: 1;
-        }
-        .ticker-item svg {
-            width: 32px;
-            height: 32px;
-            flex-shrink: 0;
-        }
-    </style>
+<meta charset="utf-8">
+<title>SIP-Voice — Téléphonie d'entreprise et réceptionniste IA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="SIP-Voice : téléphonie d'entreprise et réceptionniste IA pour les entreprises du Québec.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F8F5}
+a{color:#2d7a3a}a:hover{color:#1f5a29}
+</style>
+<style>html{scroll-behavior:smooth}</style>
 </head>
 <body>
-    <div class="relative min-h-screen flex flex-col">
-        
-        <!-- ══════════ HEADER ══════════ -->
-        <header class="fixed top-0 z-50 w-full border-b border-white/5 bg-surface/70 backdrop-blur-xl">
-            <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-                <!-- Logo -->
-                <a href="index.html" class="flex items-center gap-3 group">
-                    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/20 transition-transform group-hover:scale-110">
-                        <span class="material-symbols-outlined text-white text-xl" style="font-variation-settings:'FILL' 1">cell_tower</span>
-                    </div>
-                    <span class="text-lg font-bold tracking-tight text-white">Sip<span class="text-primary">voip</span><span class="text-accent">AI</span></span>
-                </a>
-                
-                <!-- Desktop Nav -->
-                <nav class="hidden md:flex items-center gap-8">
-                    <a class="nav-link text-base font-medium text-slate-400 hover:text-white transition-colors" href="index.html">Home</a>
-                    
-                    <!-- Solutions Dropdown -->
-                    <div class="dropdown" style="padding-bottom:12px; margin-bottom:-12px;">
-                        <button class="nav-link py-2 text-base font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-1">
-                            Solutions
-                            <span class="material-symbols-outlined text-sm transition-transform dropdown-arrow">expand_more</span>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a href="voip-solution.html" class="dropdown-item">
-                                <div class="dropdown-icon bg-primary/10 text-primary">
-                                    <span class="material-symbols-outlined text-xl">settings_phone</span>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-semibold text-white">VoIP Solution</div>
-                                    <div class="text-xs text-slate-500">HD voice & SIP trunking</div>
-                                </div>
-                            </a>
-                            <a href="ai-agent-solution.html" class="dropdown-item">
-                                <div class="dropdown-icon bg-accent/10 text-accent">
-                                    <span class="material-symbols-outlined text-xl">smart_toy</span>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-semibold text-white">AI Agent Solution</div>
-                                    <div class="text-xs text-slate-500">Intelligent call automation</div>
-                                </div>
-                            </a>
-                            <a href="contact-center-solution.html" class="dropdown-item">
-                                <div class="dropdown-icon bg-accent-green/10 text-accent-green">
-                                    <span class="material-symbols-outlined text-xl">support_agent</span>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-semibold text-white">Contact Center</div>
-                                    <div class="text-xs text-slate-500">Omnichannel cloud platform</div>
-                                </div>
-                            </a>
-                            <a href="website-creation-solution.html" class="dropdown-item">
-                                <div class="dropdown-icon bg-purple-500/10 text-purple-400">
-                                    <span class="material-symbols-outlined text-xl">language</span>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-semibold text-white">Website Creation</div>
-                                    <div class="text-xs text-slate-500">Custom AI-powered websites</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <a class="nav-link text-base font-medium text-slate-400 hover:text-white transition-colors" href="contact.html">Contact</a>
-                </nav>
-                
-                <!-- CTA -->
-                <div class="flex items-center gap-3">
-                    <button class="hidden sm:block text-base font-medium text-slate-400 hover:text-white transition-colors px-4 py-2">Log in</button>
-                    <a href="contact.html" class="btn-glow rounded-lg bg-primary px-5 py-2.5 text-base font-semibold text-white">
-                        Book a Demo
-                    </a>
-                    <a href="mailto:info@sipvoipai.com" class="hidden lg:flex items-center gap-1.5 text-sm text-slate-400 hover:text-primary transition-colors">
-                        <span class="material-symbols-outlined text-sm">mail</span>
-                        info@sipvoipai.com
-                    </a>
-                    <a href="tel:+15144589062" class="hidden lg:flex items-center gap-1.5 text-sm text-slate-400 hover:text-primary transition-colors">
-                        <span class="material-symbols-outlined text-sm">call</span>
-                        +1 514-458-9062
-                    </a>
-                    <a href="tel:+14386096257" class="hidden xl:flex items-center gap-1.5 text-sm text-slate-400 hover:text-primary transition-colors">
-                        <span class="material-symbols-outlined text-sm">call</span>
-                        +1 438 609 6257
-                    </a>
-                    <button id="mobile-menu-toggle" class="md:hidden text-slate-400 hover:text-white">
-                        <span class="material-symbols-outlined text-2xl">menu</span>
-                    </button>
-                </div>
-            </div>
-        </header>
+<div style="font-family: Inter, system-ui, sans-serif; color: #17221A; background: #F7F8F5; min-width: 0">
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm md:hidden">
-            <div class="absolute right-0 top-0 h-full w-72 bg-surface border-l border-white/5 shadow-2xl">
-                <div class="flex items-center justify-between p-6 border-b border-white/5">
-                    <span class="text-lg font-bold text-white">Menu</span>
-                    <button id="mobile-menu-close" class="text-slate-400 hover:text-white">
-                        <span class="material-symbols-outlined text-2xl">close</span>
-                    </button>
-                </div>
-                <nav class="flex flex-col p-6 space-y-5">
-                    <a class="nav-link text-base font-medium text-slate-300 hover:text-primary transition-colors" href="index.html">Home</a>
-                    
-                    <!-- Mobile Solutions Accordion -->
-                    <div>
-                        <button id="mobile-solutions-toggle" class="flex items-center justify-between w-full text-base font-medium text-slate-300 hover:text-primary transition-colors">
-                            Solutions
-                            <span class="material-symbols-outlined text-sm transition-transform" id="mobile-solutions-arrow">expand_more</span>
-                        </button>
-                        <div class="mobile-solutions-list" id="mobile-solutions-list">
-                            <div class="pt-3 pl-4 space-y-3">
-                                <a class="flex items-center gap-3 text-sm text-slate-400 hover:text-primary transition-colors" href="voip-solution.html">
-                                    <span class="material-symbols-outlined text-primary text-lg">settings_phone</span>
-                                    VoIP Solution
-                                </a>
-                                <a class="flex items-center gap-3 text-sm text-slate-400 hover:text-accent transition-colors" href="ai-agent-solution.html">
-                                    <span class="material-symbols-outlined text-accent text-lg">smart_toy</span>
-                                    AI Agent Solution
-                                </a>
-                                <a class="flex items-center gap-3 text-sm text-slate-400 hover:text-accent-green transition-colors" href="contact-center-solution.html">
-                                    <span class="material-symbols-outlined text-accent-green text-lg">support_agent</span>
-                                    Contact Center
-                                </a>
-                                <a class="flex items-center gap-3 text-sm text-slate-400 hover:text-purple-400 transition-colors" href="website-creation-solution.html">
-                                    <span class="material-symbols-outlined text-purple-400 text-lg">language</span>
-                                    Website Creation
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <a class="nav-link text-base font-medium text-slate-300 hover:text-primary transition-colors" href="contact.html">Contact</a>
-                    <hr class="border-white/10"/>
-                    <a href="contact.html" class="btn-glow rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white w-full text-center">Book a Demo</a>
-                </nav>
-            </div>
-        </div>
+<!-- En-tête -->
+<header style="background: #FFFFFF; border-bottom: 1px solid #E3E8E1">
+<div style="max-width: 1180px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#accueil" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #17221A">
+<span style="width: 36px; height: 36px; border-radius: 10px; background: #2d7a3a; display: flex; align-items: center; justify-content: center">
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>
+</span>
+<span style="font-family: Manrope, sans-serif; font-weight: 800; font-size: 20px">SIP-Voice</span>
+</a>
+<nav style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px; font-size: 15px; font-weight: 500">
+<a href="#plateforme" style="color: #3B4A3F; text-decoration: none">Plateforme</a>
+<a href="#sophie" style="color: #3B4A3F; text-decoration: none">Sophie IA</a>
+<a href="#secteurs" style="color: #3B4A3F; text-decoration: none">Secteurs</a>
+<a href="#contact" style="color: #3B4A3F; text-decoration: none">Contact</a>
+<a href="https://app.sipvoipai.com" style="color: #2d7a3a; text-decoration: none; font-weight: 600">Se connecter</a>
+<a href="#contact" style="background: #2d7a3a; color: #FFFFFF; text-decoration: none; padding: 12px 18px; border-radius: 10px; font-weight: 600">Demander une démo</a>
+</nav>
+</div>
+</header>
 
-        <main class="flex-1">
-            <!-- ══════════ HERO ══════════ -->
-            <section class="relative min-h-screen flex items-center justify-center px-6 pt-20 pb-12 hero-bg overflow-hidden">
-                <div class="absolute inset-0 z-0">
-                    <video autoplay muted loop playsinline class="w-full h-full object-cover object-center">
-                        <source src="assets/images/hero-bg.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-gradient-to-b from-[#0c1222]/40 via-[#0c1222]/30 to-[#0c1222]/70"></div>
-                </div>
-                
-                <div class="absolute inset-0 grid-pattern"></div>
-                <div class="orb orb-1"></div>
-                <div class="orb orb-2"></div>
-                <div class="orb orb-3"></div>
-                
-                <div class="relative z-10 mx-auto max-w-6xl w-full">
-                    <div class="text-center max-w-3xl mx-auto mb-16">
-                        <!-- Badge -->
-                        <div class="hero-enter hero-enter-1 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 mb-8">
-                            <div class="live-dot"></div>
-                            <span class="text-xs font-semibold text-primary tracking-wide">Now Live — AI Voice Agents v3.0</span>
-                        </div>
-                        
-                        <!-- Heading -->
-                        <h1 class="hero-enter hero-enter-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
-                            Your Calls.<br/>
-                            <span class="bg-gradient-to-r from-primary via-accent to-accent-green bg-clip-text text-transparent">Powered by AI.</span>
-                        </h1>
-                        
-                        <!-- Subheading -->
-                        <p class="hero-enter hero-enter-3 text-lg md:text-xl text-slate-400 max-w-xl mx-auto mb-10 leading-relaxed">
-                            SipvoipAI delivers enterprise-grade VoIP, intelligent call routing, and AI automation — so you never miss a lead again.
-                        </p>
-                        
-                        <!-- CTA Buttons -->
-                        <div class="hero-enter hero-enter-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <a href="contact.html" class="btn-glow w-full sm:w-auto rounded-xl bg-primary px-8 py-4 text-base font-bold text-white flex items-center justify-center gap-2">
-                                Book a Demo
-                                <span class="material-symbols-outlined text-lg">arrow_forward</span>
-                            </a>
-                        </div>
-                        
-                        <!-- Trust bar -->
-                        <div class="hero-enter hero-enter-5 mt-12 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500">
-                            <div class="flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-accent-green text-sm">verified</span>
-                                SOC 2 Certified
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-accent-green text-sm">verified</span>
-                                99.99% Uptime SLA
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-accent-green text-sm">verified</span>
-                                500+ Businesses Trust Us
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- ══════════ DASHBOARD MOCKUP ══════════ -->
-                    <div class="hero-enter hero-enter-5 dashboard-glow rounded-2xl border border-white/10 bg-surface-light/80 backdrop-blur-md p-1.5 max-w-5xl mx-auto">
-                        <div class="rounded-xl bg-surface overflow-hidden">
-                            <!-- Window Chrome -->
-                            <div class="flex items-center justify-between border-b border-white/5 px-4 py-2.5">
-                                <div class="flex items-center gap-2">
-                                    <div class="h-3 w-3 rounded-full bg-red-500/70"></div>
-                                    <div class="h-3 w-3 rounded-full bg-yellow-500/70"></div>
-                                    <div class="h-3 w-3 rounded-full bg-green-500/70"></div>
-                                </div>
-                                <div class="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-1 text-[11px] text-slate-500 font-mono">
-                                    <span class="material-symbols-outlined text-xs">lock</span>
-                                    app.sipvoipai.com/dashboard
-                                </div>
-                                <div class="w-[52px]"></div>
-                            </div>
-                            
-                            <!-- Dashboard Content -->
-                            <div class="p-5 space-y-4">
-                                <!-- Top Row: Stats -->
-                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                    <div class="rounded-lg bg-surface-card border border-white/5 p-4">
-                                        <div class="text-[11px] text-slate-500 font-medium mb-1">Active Calls</div>
-                                        <div class="text-2xl font-bold text-white">1,247</div>
-                                        <div class="flex items-center gap-1 mt-1 text-[11px] text-accent-green font-medium">
-                                            <span class="material-symbols-outlined text-xs">trending_up</span>
-                                            +12.5%
-                                        </div>
-                                    </div>
-                                    <div class="rounded-lg bg-surface-card border border-white/5 p-4">
-                                        <div class="text-[11px] text-slate-500 font-medium mb-1">AI Handled</div>
-                                        <div class="text-2xl font-bold text-white">89<span class="text-primary">%</span></div>
-                                        <div class="flex items-center gap-1 mt-1 text-[11px] text-accent-green font-medium">
-                                            <span class="material-symbols-outlined text-xs">trending_up</span>
-                                            +3.2%
-                                        </div>
-                                    </div>
-                                    <div class="rounded-lg bg-surface-card border border-white/5 p-4 hidden md:block">
-                                        <div class="text-[11px] text-slate-500 font-medium mb-1">Avg Response</div>
-                                        <div class="text-2xl font-bold text-white">0.8<span class="text-accent">s</span></div>
-                                        <div class="flex items-center gap-1 mt-1 text-[11px] text-accent-green font-medium">
-                                            <span class="material-symbols-outlined text-xs">trending_down</span>
-                                            -18ms
-                                        </div>
-                                    </div>
-                                    <div class="rounded-lg bg-surface-card border border-white/5 p-4 hidden md:block">
-                                        <div class="text-[11px] text-slate-500 font-medium mb-1">Satisfaction</div>
-                                        <div class="text-2xl font-bold text-white">4.9<span class="text-yellow-400">/5</span></div>
-                                        <div class="flex items-center gap-1 mt-1 text-[11px] text-accent-green font-medium">
-                                            <span class="material-symbols-outlined text-xs">trending_up</span>
-                                            +0.3
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Chart + Activity Row -->
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                    <!-- Chart -->
-                                    <div class="md:col-span-2 rounded-lg bg-surface-card border border-white/5 p-4">
-                                        <div class="flex items-center justify-between mb-4">
-                                            <span class="text-xs font-semibold text-slate-300">Call Volume — Last 7 Days</span>
-                                            <div class="flex items-center gap-3 text-[10px] text-slate-500">
-                                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary inline-block"></span>Inbound</span>
-                                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-accent-green inline-block"></span>AI Resolved</span>
-                                            </div>
-                                        </div>
-                                        <div class="h-32 flex items-end gap-[6px]">
-                                            <div class="flex-1 flex flex-col items-center gap-[2px]">
-                                                <div class="w-full rounded-t bg-primary/60 stat-bar" style="height:55%;animation-delay:0.1s"></div>
-                                                <div class="w-full rounded-t bg-accent-green/40 stat-bar" style="height:45%;animation-delay:0.15s"></div>
-                                                <span class="text-[9px] text-slate-600 mt-1">Mon</span>
-                                            </div>
-                                            <div class="flex-1 flex flex-col items-center gap-[2px]">
-                                                <div class="w-full rounded-t bg-primary/60 stat-bar" style="height:70%;animation-delay:0.2s"></div>
-                                                <div class="w-full rounded-t bg-accent-green/40 stat-bar" style="height:60%;animation-delay:0.25s"></div>
-                                                <span class="text-[9px] text-slate-600 mt-1">Tue</span>
-                                            </div>
-                                            <div class="flex-1 flex flex-col items-center gap-[2px]">
-                                                <div class="w-full rounded-t bg-primary/60 stat-bar" style="height:45%;animation-delay:0.3s"></div>
-                                                <div class="w-full rounded-t bg-accent-green/40 stat-bar" style="height:38%;animation-delay:0.35s"></div>
-                                                <span class="text-[9px] text-slate-600 mt-1">Wed</span>
-                                            </div>
-                                            <div class="flex-1 flex flex-col items-center gap-[2px]">
-                                                <div class="w-full rounded-t bg-primary/60 stat-bar" style="height:85%;animation-delay:0.4s"></div>
-                                                <div class="w-full rounded-t bg-accent-green/40 stat-bar" style="height:75%;animation-delay:0.45s"></div>
-                                                <span class="text-[9px] text-slate-600 mt-1">Thu</span>
-                                            </div>
-                                            <div class="flex-1 flex flex-col items-center gap-[2px]">
-                                                <div class="w-full rounded-t bg-primary/70 stat-bar" style="height:95%;animation-delay:0.5s"></div>
-                                                <div class="w-full rounded-t bg-accent-green/50 stat-bar" style="height:88%;animation-delay:0.55s"></div>
-                                                <span class="text-[9px] text-slate-600 mt-1">Fri</span>
-                                            </div>
-                                            <div class="flex-1 flex flex-col items-center gap-[2px]">
-                                                <div class="w-full rounded-t bg-primary/50 stat-bar" style="height:40%;animation-delay:0.6s"></div>
-                                                <div class="w-full rounded-t bg-accent-green/40 stat-bar" style="height:35%;animation-delay:0.65s"></div>
-                                                <span class="text-[9px] text-slate-600 mt-1">Sat</span>
-                                            </div>
-                                            <div class="flex-1 flex flex-col items-center gap-[2px]">
-                                                <div class="w-full rounded-t bg-primary/40 stat-bar" style="height:30%;animation-delay:0.7s"></div>
-                                                <div class="w-full rounded-t bg-accent-green/30 stat-bar" style="height:25%;animation-delay:0.75s"></div>
-                                                <span class="text-[9px] text-slate-600 mt-1">Sun</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Live Activity Feed -->
-                                    <div class="rounded-lg bg-surface-card border border-white/5 p-4">
-                                        <div class="flex items-center gap-2 mb-4">
-                                            <div class="live-dot" style="width:6px;height:6px"></div>
-                                            <span class="text-xs font-semibold text-slate-300">Live Activity</span>
-                                        </div>
-                                        <div class="space-y-3 text-[11px]">
-                                            <div class="flex items-start gap-2">
-                                                <span class="material-symbols-outlined text-accent-green text-sm mt-0.5">call_received</span>
-                                                <div>
-                                                    <div class="text-slate-300">AI answered call from <span class="text-white font-medium">+1 514 ***</span></div>
-                                                    <div class="text-slate-600">2s ago</div>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-start gap-2">
-                                                <span class="material-symbols-outlined text-primary text-sm mt-0.5">smart_toy</span>
-                                                <div>
-                                                    <div class="text-slate-300">Appointment booked via <span class="text-white font-medium">AI Agent</span></div>
-                                                    <div class="text-slate-600">15s ago</div>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-start gap-2">
-                                                <span class="material-symbols-outlined text-yellow-400 text-sm mt-0.5">route</span>
-                                                <div>
-                                                    <div class="text-slate-300">Call routed to <span class="text-white font-medium">Sales team</span></div>
-                                                    <div class="text-slate-600">42s ago</div>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-start gap-2">
-                                                <span class="material-symbols-outlined text-accent text-sm mt-0.5">transcribe</span>
-                                                <div>
-                                                    <div class="text-slate-300">Transcript generated <span class="text-white font-medium cursor-blink"></span></div>
-                                                    <div class="text-slate-600">Just now</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- Accroche -->
+<section id="accueil" style="max-width: 1180px; margin: 0 auto; padding: 88px 24px 72px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+<div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<span style="align-self: flex-start; background: #E4F1E6; color: #1f5a29; font-size: 14px; font-weight: 600; padding: 8px 14px; border-radius: 999px">Téléphonie d'entreprise + réceptionniste IA</span>
+<h1 style="margin: 0; font-family: Manrope, sans-serif; font-weight: 800; font-size: 54px; line-height: 1.08; letter-spacing: -0.02em">Ne manquez plus jamais un appel client.</h1>
+<p style="margin: 0; font-size: 19px; line-height: 1.6; color: #4A5A4E; max-width: 540px">SIP-Voice réunit vos appels, vos messages et vos réunions dans une seule application. Quand votre équipe est occupée, Sophie, votre réceptionniste IA, répond à votre place et prend les rendez-vous.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#contact" style="background: #2d7a3a; color: #FFFFFF; text-decoration: none; padding: 16px 24px; border-radius: 12px; font-weight: 600; font-size: 16px">Demander une démo</a>
+<a href="#sophie" style="background: #FFFFFF; color: #17221A; text-decoration: none; padding: 16px 24px; border-radius: 12px; font-weight: 600; font-size: 16px; border: 1px solid #CBD5C8">Découvrir Sophie</a>
+</div>
+</div>
+<div style="flex: 1 1 420px; min-width: 0">
+<div style="background: #FFFFFF; border: 1px solid #E3E8E1; border-radius: 20px; padding: 24px; box-shadow: 0 20px 50px rgba(23,34,26,0.08); display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-weight: 600; font-size: 15px">Appel entrant</span>
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #1f5a29; font-weight: 600"><span style="width: 8px; height: 8px; border-radius: 50%; background: #2d7a3a"></span>Disponible</span>
+</div>
+<div style="background: #F2F5F1; border-radius: 14px; padding: 18px; display: flex; align-items: center; gap: 14px">
+<span style="width: 48px; height: 48px; border-radius: 50%; background: #D5E6D8; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #1f5a29">MC</span>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-weight: 600">Marie Côté</span>
+<span style="font-size: 14px; color: #5B6B5F">+1 514 555-0142</span>
+</div>
+</div>
+<div style="display: flex; gap: 10px">
+<span style="flex: 1; text-align: center; background: #2d7a3a; color: #FFFFFF; padding: 12px; border-radius: 10px; font-weight: 600; font-size: 14px">Répondre</span>
+<span style="flex: 1; text-align: center; background: #FFFFFF; color: #17221A; border: 1px solid #CBD5C8; padding: 12px; border-radius: 10px; font-weight: 600; font-size: 14px">Refuser</span>
+</div>
+<div style="border-top: 1px solid #E3E8E1; padding-top: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-weight: 600; font-size: 15px">Mode Sophie IA</span>
+<span style="font-size: 13px; color: #5B6B5F">Sophie répond quand vous êtes occupé</span>
+</div>
+<span style="width: 52px; height: 30px; border-radius: 999px; background: #2d7a3a; position: relative; flex-shrink: 0"><span style="position: absolute; right: 3px; top: 3px; width: 24px; height: 24px; border-radius: 50%; background: #FFFFFF"></span></span>
+</div>
+</div>
+</div>
+</section>
 
-            <!-- ══════════ LOGO TICKER ══════════ -->
-            <section class="py-10 px-6 border-y border-white/5 bg-surface/50">
-                <p class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 mb-8">Powered by Leading AI &amp; Cloud Platforms</p>
-                <div class="ticker-wrap">
-                    <div class="ticker-track">
-                        <!-- Set 1 -->
-                        <div class="ticker-item">
-                            <!-- OpenAI -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg>
-                            <span class="text-xl font-bold text-white">OpenAI</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- Anthropic -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M13.827 3.52h3.603L24 20h-3.603zm-7.258 0h3.767L16.906 20h-3.674l-1.343-3.93H5.786L4.44 20H.839zm4.898 9.882L9.167 7.79 6.906 13.402z"/></svg>
-                            <span class="text-xl font-bold text-white">Anthropic</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- Google Gemini -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M11.04 0C5.01 0 0 5.01 0 11.04c0 4.27 2.42 7.96 5.98 9.82L9.73 12H6.4l1.4-4.26h1.98l.64-1.96c.57-1.74 1.76-2.6 3.35-2.6.96 0 1.97.18 2.95.55L15.3 7.3c-.7-.24-1.38-.36-2.04-.36-.96 0-1.4.51-1.65 1.3L11.15 9.7h3.17L12.9 14h-3.2L7.48 21.2C8.6 21.72 9.8 22 11.04 22c6.07 0 10.96-4.9 10.96-10.96C22 4.97 17.1 0 11.04 0z"/></svg>
-                            <span class="text-xl font-bold text-white">Google Gemini</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- ElevenLabs -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M4 0h4v24H4zM10 0h4v24h-4zM16 0h4v24h-4z"/></svg>
-                            <span class="text-xl font-bold text-white">ElevenLabs</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- Meta AI -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 2.061-.246 2.857-.706.987-.563 1.73-1.437 2.22-2.72.367-.974.58-2.098.58-3.503 0-2.307-.692-4.56-1.948-6.032C21.042 5.326 19.785 4.5 18.3 4.5c-.895 0-1.782.287-2.57.815-.555.366-1.074.87-1.552 1.517a8.12 8.12 0 0 0-.59.898L13.5 7.8l-.082-.144c-.478-.83-1.023-1.553-1.62-2.054C10.948 4.714 10.007 4.03 8.63 4.03H6.915zm1.19 2.153c.617 0 1.154.197 1.667.616.51.417 1.004 1.075 1.52 2.013l.37.659.284.513-.38.671-1.457 2.527c-.74 1.284-1.18 1.976-1.677 2.62-.633.827-1.21 1.224-1.883 1.224-.818 0-1.384-.395-1.768-1.068a4.463 4.463 0 0 1-.262-.63 5.033 5.033 0 0 1-.162-1.37c0-2.22.592-4.387 1.596-5.793.763-1.073 1.655-1.782 2.152-1.782zm10.195.006c.628 0 1.358.405 2.059 1.26.923 1.12 1.562 2.98 1.562 5.129 0 1.03-.147 1.815-.38 2.408-.24.617-.58 1.003-1.069 1.282-.325.185-.729.292-1.172.292-.608 0-1.137-.23-1.821-.885-.62-.594-1.44-1.778-2.063-2.83L15.4 11.1c.59-1.045 1.085-1.726 1.578-2.19.607-.572 1.218-.72 1.322-.72z"/></svg>
-                            <span class="text-xl font-bold text-white">Meta AI</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- Twilio -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.824a9.176 9.176 0 1 1 0 18.352A9.176 9.176 0 0 1 12 2.824zm2.91 5.06a1.986 1.986 0 1 0 0 3.973 1.986 1.986 0 0 0 0-3.973zm-5.82 0a1.986 1.986 0 1 0 0 3.973 1.986 1.986 0 0 0 0-3.973zm5.82 5.81a1.986 1.986 0 1 0 0 3.972 1.986 1.986 0 0 0 0-3.972zm-5.82 0a1.986 1.986 0 1 0 0 3.972 1.986 1.986 0 0 0 0-3.972z"/></svg>
-                            <span class="text-xl font-bold text-white">Twilio</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- Microsoft Azure -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M13.05 4.24L6.56 16.03l-1.43 2.5H0l7.2-12.5L13.05 4.24zm.7 1.46L24 19.76H12.88l3.43-5.96-3.1-5.37 0.54-.73zm-2.66 8.57l-5.3 0 0-.58 5.3 0 0 .58z"/></svg>
-                            <span class="text-xl font-bold text-white">Microsoft Azure</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- AWS -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M6.763 10.036c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335a.383.383 0 0 1-.208.072c-.08 0-.16-.04-.239-.112a2.47 2.47 0 0 1-.287-.375 6.18 6.18 0 0 1-.248-.471c-.622.734-1.405 1.101-2.347 1.101-.67 0-1.205-.191-1.596-.574-.391-.384-.59-.894-.59-1.533 0-.678.239-1.23.726-1.644.487-.415 1.133-.623 1.955-.623.272 0 .551.024.846.064.296.04.6.104.918.176v-.583c0-.607-.127-1.03-.375-1.277-.255-.248-.686-.367-1.3-.367-.28 0-.568.031-.863.103-.295.072-.583.16-.862.272a2.287 2.287 0 0 1-.28.104.488.488 0 0 1-.127.023c-.112 0-.168-.08-.168-.247v-.391c0-.128.016-.224.056-.28a.597.597 0 0 1 .224-.167c.279-.144.614-.264 1.005-.36a4.84 4.84 0 0 1 1.246-.151c.95 0 1.644.216 2.091.647.439.43.662 1.085.662 1.963v2.586zm-3.24 1.214c.263 0 .534-.048.822-.144.287-.096.543-.271.758-.51.128-.152.224-.32.272-.512.047-.191.08-.423.08-.694v-.335a6.66 6.66 0 0 0-.735-.136 6.02 6.02 0 0 0-.75-.048c-.535 0-.926.104-1.19.32-.263.215-.39.518-.39.917 0 .375.095.655.295.846.191.2.47.296.838.296zm6.41.862c-.144 0-.24-.024-.304-.08-.064-.048-.12-.16-.168-.311L7.586 5.55a1.398 1.398 0 0 1-.072-.32c0-.128.064-.2.191-.2h.783c.151 0 .255.025.31.08.065.048.113.16.16.312l1.342 5.284 1.245-5.284c.04-.16.088-.264.151-.312a.549.549 0 0 1 .32-.08h.638c.152 0 .256.025.32.08.063.048.12.16.151.312l1.261 5.348 1.381-5.348c.048-.16.104-.264.16-.312a.52.52 0 0 1 .311-.08h.743c.127 0 .2.065.2.2 0 .04-.009.08-.017.128a1.137 1.137 0 0 1-.056.2l-1.923 6.17c-.048.16-.104.263-.168.311a.51.51 0 0 1-.303.08h-.687c-.151 0-.255-.024-.32-.08-.063-.056-.119-.16-.15-.32l-1.238-5.148-1.23 5.14c-.04.16-.087.264-.15.32-.065.056-.177.08-.32.08zm10.256.215c-.415 0-.83-.048-1.229-.143-.399-.096-.71-.2-.918-.32-.128-.071-.215-.151-.247-.223a.563.563 0 0 1-.048-.224v-.407c0-.167.064-.247.183-.247.048 0 .096.008.144.024.048.016.12.048.2.08.271.12.566.215.878.279.319.064.63.096.95.096.502 0 .894-.088 1.165-.264a.86.86 0 0 0 .415-.758.777.777 0 0 0-.215-.559c-.144-.151-.415-.287-.806-.415l-1.157-.36c-.583-.183-1.014-.454-1.277-.813a1.902 1.902 0 0 1-.4-1.158c0-.335.073-.63.216-.886.144-.255.335-.479.575-.654.24-.184.51-.32.83-.415.32-.096.655-.136 1.006-.136.175 0 .359.008.535.032.183.024.35.056.518.088.16.04.312.08.455.127.144.048.256.096.336.144a.69.69 0 0 1 .24.2.43.43 0 0 1 .071.263v.375c0 .168-.064.256-.184.256a.83.83 0 0 1-.303-.096 3.652 3.652 0 0 0-1.532-.311c-.455 0-.815.071-1.062.223-.248.152-.375.383-.375.71 0 .224.08.416.24.567.159.152.454.304.877.44l1.134.358c.574.184.99.44 1.237.767.247.327.367.702.367 1.117 0 .343-.072.655-.207.926-.144.272-.336.511-.583.703-.248.2-.543.343-.886.447-.36.111-.734.167-1.142.167z"/><path d="M20.16 17.635c-2.652 1.96-6.51 3-9.82 3-4.647 0-8.831-1.718-11.993-4.574-.248-.224-.024-.527.272-.352 3.414 1.986 7.633 3.184 11.993 3.184 2.94 0 6.175-.607 9.15-1.874.447-.192.822.294.398.616z"/><path d="M21.198 16.44c-.335-.432-2.22-.207-3.074-.103-.255.032-.295-.192-.064-.36 1.502-1.055 3.967-.75 4.254-.399.287.36-.08 2.826-1.485 4.007-.215.184-.423.088-.327-.151.32-.79 1.03-2.565.696-2.994z"/></svg>
-                            <span class="text-xl font-bold text-white">AWS</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- Midjourney — no official SVG, use sparkles icon -->
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-white"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z"/></svg>
-                            <span class="text-xl font-bold text-white">Midjourney</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- Kling AI — use film icon -->
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-white"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
-                            <span class="text-xl font-bold text-white">Kling AI</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- LinkedIn -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                            <span class="text-xl font-bold text-white">LinkedIn</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- X (Twitter) -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-                            <span class="text-xl font-bold text-white">X (Twitter)</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- Slack -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg>
-                            <span class="text-xl font-bold text-white">Slack</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- HubSpot -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M22.55 13.025a3.58 3.58 0 0 0-3.062-3.55V7.638a1.44 1.44 0 0 0 .834-1.3V6.3a1.44 1.44 0 0 0-1.438-1.438h-.037A1.44 1.44 0 0 0 17.41 6.3v.038c0 .58.347 1.084.834 1.3v1.837a3.564 3.564 0 0 0-1.709.748l-5.037-3.919a1.637 1.637 0 0 0 .057-.41 1.65 1.65 0 1 0-1.65 1.65c.32 0 .614-.093.864-.25l4.953 3.854a3.585 3.585 0 0 0-.456 1.749 3.583 3.583 0 0 0 1.73 3.075l-1.31 3.24a1.22 1.22 0 0 0-.318-.044 1.237 1.237 0 1 0 1.237 1.237 1.222 1.222 0 0 0-.356-.862l1.329-3.289a3.6 3.6 0 0 0 1.03.153 3.585 3.585 0 0 0 3.585-3.585l-.014-.097zm-3.57 1.962a1.862 1.862 0 1 1 0-3.724 1.862 1.862 0 0 1 0 3.724z"/></svg>
-                            <span class="text-xl font-bold text-white">HubSpot</span>
-                        </div>
-                        <div class="ticker-item">
-                            <!-- Salesforce -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M10.005 5.06A4.614 4.614 0 0 1 13.244 3.8a4.65 4.65 0 0 1 4.32 2.93 3.198 3.198 0 0 1 1.355-.298 3.234 3.234 0 0 1 3.233 3.233 3.234 3.234 0 0 1-3.233 3.233H4.48A3.48 3.48 0 0 1 1 9.419a3.48 3.48 0 0 1 3.48-3.48 3.457 3.457 0 0 1 1.518.347A4.63 4.63 0 0 1 10.005 5.06z"/></svg>
-                            <span class="text-xl font-bold text-white">Salesforce</span>
-                        </div>
-                        <!-- Set 2 (duplicate for seamless loop) -->
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg>
-                            <span class="text-xl font-bold text-white">OpenAI</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M13.827 3.52h3.603L24 20h-3.603zm-7.258 0h3.767L16.906 20h-3.674l-1.343-3.93H5.786L4.44 20H.839zm4.898 9.882L9.167 7.79 6.906 13.402z"/></svg>
-                            <span class="text-xl font-bold text-white">Anthropic</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M11.04 0C5.01 0 0 5.01 0 11.04c0 4.27 2.42 7.96 5.98 9.82L9.73 12H6.4l1.4-4.26h1.98l.64-1.96c.57-1.74 1.76-2.6 3.35-2.6.96 0 1.97.18 2.95.55L15.3 7.3c-.7-.24-1.38-.36-2.04-.36-.96 0-1.4.51-1.65 1.3L11.15 9.7h3.17L12.9 14h-3.2L7.48 21.2C8.6 21.72 9.8 22 11.04 22c6.07 0 10.96-4.9 10.96-10.96C22 4.97 17.1 0 11.04 0z"/></svg>
-                            <span class="text-xl font-bold text-white">Google Gemini</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M4 0h4v24H4zM10 0h4v24h-4zM16 0h4v24h-4z"/></svg>
-                            <span class="text-xl font-bold text-white">ElevenLabs</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 2.061-.246 2.857-.706.987-.563 1.73-1.437 2.22-2.72.367-.974.58-2.098.58-3.503 0-2.307-.692-4.56-1.948-6.032C21.042 5.326 19.785 4.5 18.3 4.5c-.895 0-1.782.287-2.57.815-.555.366-1.074.87-1.552 1.517a8.12 8.12 0 0 0-.59.898L13.5 7.8l-.082-.144c-.478-.83-1.023-1.553-1.62-2.054C10.948 4.714 10.007 4.03 8.63 4.03H6.915zm1.19 2.153c.617 0 1.154.197 1.667.616.51.417 1.004 1.075 1.52 2.013l.37.659.284.513-.38.671-1.457 2.527c-.74 1.284-1.18 1.976-1.677 2.62-.633.827-1.21 1.224-1.883 1.224-.818 0-1.384-.395-1.768-1.068a4.463 4.463 0 0 1-.262-.63 5.033 5.033 0 0 1-.162-1.37c0-2.22.592-4.387 1.596-5.793.763-1.073 1.655-1.782 2.152-1.782zm10.195.006c.628 0 1.358.405 2.059 1.26.923 1.12 1.562 2.98 1.562 5.129 0 1.03-.147 1.815-.38 2.408-.24.617-.58 1.003-1.069 1.282-.325.185-.729.292-1.172.292-.608 0-1.137-.23-1.821-.885-.62-.594-1.44-1.778-2.063-2.83L15.4 11.1c.59-1.045 1.085-1.726 1.578-2.19.607-.572 1.218-.72 1.322-.72z"/></svg>
-                            <span class="text-xl font-bold text-white">Meta AI</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.824a9.176 9.176 0 1 1 0 18.352A9.176 9.176 0 0 1 12 2.824zm2.91 5.06a1.986 1.986 0 1 0 0 3.973 1.986 1.986 0 0 0 0-3.973zm-5.82 0a1.986 1.986 0 1 0 0 3.973 1.986 1.986 0 0 0 0-3.973zm5.82 5.81a1.986 1.986 0 1 0 0 3.972 1.986 1.986 0 0 0 0-3.972zm-5.82 0a1.986 1.986 0 1 0 0 3.972 1.986 1.986 0 0 0 0-3.972z"/></svg>
-                            <span class="text-xl font-bold text-white">Twilio</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M13.05 4.24L6.56 16.03l-1.43 2.5H0l7.2-12.5L13.05 4.24zm.7 1.46L24 19.76H12.88l3.43-5.96-3.1-5.37 0.54-.73zm-2.66 8.57l-5.3 0 0-.58 5.3 0 0 .58z"/></svg>
-                            <span class="text-xl font-bold text-white">Microsoft Azure</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M6.763 10.036c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335a.383.383 0 0 1-.208.072c-.08 0-.16-.04-.239-.112a2.47 2.47 0 0 1-.287-.375 6.18 6.18 0 0 1-.248-.471c-.622.734-1.405 1.101-2.347 1.101-.67 0-1.205-.191-1.596-.574-.391-.384-.59-.894-.59-1.533 0-.678.239-1.23.726-1.644.487-.415 1.133-.623 1.955-.623.272 0 .551.024.846.064.296.04.6.104.918.176v-.583c0-.607-.127-1.03-.375-1.277-.255-.248-.686-.367-1.3-.367-.28 0-.568.031-.863.103-.295.072-.583.16-.862.272a2.287 2.287 0 0 1-.28.104.488.488 0 0 1-.127.023c-.112 0-.168-.08-.168-.247v-.391c0-.128.016-.224.056-.28a.597.597 0 0 1 .224-.167c.279-.144.614-.264 1.005-.36a4.84 4.84 0 0 1 1.246-.151c.95 0 1.644.216 2.091.647.439.43.662 1.085.662 1.963v2.586zm-3.24 1.214c.263 0 .534-.048.822-.144.287-.096.543-.271.758-.51.128-.152.224-.32.272-.512.047-.191.08-.423.08-.694v-.335a6.66 6.66 0 0 0-.735-.136 6.02 6.02 0 0 0-.75-.048c-.535 0-.926.104-1.19.32-.263.215-.39.518-.39.917 0 .375.095.655.295.846.191.2.47.296.838.296zm6.41.862c-.144 0-.24-.024-.304-.08-.064-.048-.12-.16-.168-.311L7.586 5.55a1.398 1.398 0 0 1-.072-.32c0-.128.064-.2.191-.2h.783c.151 0 .255.025.31.08.065.048.113.16.16.312l1.342 5.284 1.245-5.284c.04-.16.088-.264.151-.312a.549.549 0 0 1 .32-.08h.638c.152 0 .256.025.32.08.063.048.12.16.151.312l1.261 5.348 1.381-5.348c.048-.16.104-.264.16-.312a.52.52 0 0 1 .311-.08h.743c.127 0 .2.065.2.2 0 .04-.009.08-.017.128a1.137 1.137 0 0 1-.056.2l-1.923 6.17c-.048.16-.104.263-.168.311a.51.51 0 0 1-.303.08h-.687c-.151 0-.255-.024-.32-.08-.063-.056-.119-.16-.15-.32l-1.238-5.148-1.23 5.14c-.04.16-.087.264-.15.32-.065.056-.177.08-.32.08zm10.256.215c-.415 0-.83-.048-1.229-.143-.399-.096-.71-.2-.918-.32-.128-.071-.215-.151-.247-.223a.563.563 0 0 1-.048-.224v-.407c0-.167.064-.247.183-.247.048 0 .096.008.144.024.048.016.12.048.2.08.271.12.566.215.878.279.319.064.63.096.95.096.502 0 .894-.088 1.165-.264a.86.86 0 0 0 .415-.758.777.777 0 0 0-.215-.559c-.144-.151-.415-.287-.806-.415l-1.157-.36c-.583-.183-1.014-.454-1.277-.813a1.902 1.902 0 0 1-.4-1.158c0-.335.073-.63.216-.886.144-.255.335-.479.575-.654.24-.184.51-.32.83-.415.32-.096.655-.136 1.006-.136.175 0 .359.008.535.032.183.024.35.056.518.088.16.04.312.08.455.127.144.048.256.096.336.144a.69.69 0 0 1 .24.2.43.43 0 0 1 .071.263v.375c0 .168-.064.256-.184.256a.83.83 0 0 1-.303-.096 3.652 3.652 0 0 0-1.532-.311c-.455 0-.815.071-1.062.223-.248.152-.375.383-.375.71 0 .224.08.416.24.567.159.152.454.304.877.44l1.134.358c.574.184.99.44 1.237.767.247.327.367.702.367 1.117 0 .343-.072.655-.207.926-.144.272-.336.511-.583.703-.248.2-.543.343-.886.447-.36.111-.734.167-1.142.167z"/><path d="M20.16 17.635c-2.652 1.96-6.51 3-9.82 3-4.647 0-8.831-1.718-11.993-4.574-.248-.224-.024-.527.272-.352 3.414 1.986 7.633 3.184 11.993 3.184 2.94 0 6.175-.607 9.15-1.874.447-.192.822.294.398.616z"/><path d="M21.198 16.44c-.335-.432-2.22-.207-3.074-.103-.255.032-.295-.192-.064-.36 1.502-1.055 3.967-.75 4.254-.399.287.36-.08 2.826-1.485 4.007-.215.184-.423.088-.327-.151.32-.79 1.03-2.565.696-2.994z"/></svg>
-                            <span class="text-xl font-bold text-white">AWS</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-white"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z"/></svg>
-                            <span class="text-xl font-bold text-white">Midjourney</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-white"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
-                            <span class="text-xl font-bold text-white">Kling AI</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                            <span class="text-xl font-bold text-white">LinkedIn</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-                            <span class="text-xl font-bold text-white">X (Twitter)</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg>
-                            <span class="text-xl font-bold text-white">Slack</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M22.55 13.025a3.58 3.58 0 0 0-3.062-3.55V7.638a1.44 1.44 0 0 0 .834-1.3V6.3a1.44 1.44 0 0 0-1.438-1.438h-.037A1.44 1.44 0 0 0 17.41 6.3v.038c0 .58.347 1.084.834 1.3v1.837a3.564 3.564 0 0 0-1.709.748l-5.037-3.919a1.637 1.637 0 0 0 .057-.41 1.65 1.65 0 1 0-1.65 1.65c.32 0 .614-.093.864-.25l4.953 3.854a3.585 3.585 0 0 0-.456 1.749 3.583 3.583 0 0 0 1.73 3.075l-1.31 3.24a1.22 1.22 0 0 0-.318-.044 1.237 1.237 0 1 0 1.237 1.237 1.222 1.222 0 0 0-.356-.862l1.329-3.289a3.6 3.6 0 0 0 1.03.153 3.585 3.585 0 0 0 3.585-3.585l-.014-.097zm-3.57 1.962a1.862 1.862 0 1 1 0-3.724 1.862 1.862 0 0 1 0 3.724z"/></svg>
-                            <span class="text-xl font-bold text-white">HubSpot</span>
-                        </div>
-                        <div class="ticker-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M10.005 5.06A4.614 4.614 0 0 1 13.244 3.8a4.65 4.65 0 0 1 4.32 2.93 3.198 3.198 0 0 1 1.355-.298 3.234 3.234 0 0 1 3.233 3.233 3.234 3.234 0 0 1-3.233 3.233H4.48A3.48 3.48 0 0 1 1 9.419a3.48 3.48 0 0 1 3.48-3.48 3.457 3.457 0 0 1 1.518.347A4.63 4.63 0 0 1 10.005 5.06z"/></svg>
-                            <span class="text-xl font-bold text-white">Salesforce</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- Plateforme -->
+<section id="plateforme" style="background: #FFFFFF; border-top: 1px solid #E3E8E1; border-bottom: 1px solid #E3E8E1">
+<div style="max-width: 1180px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 640px">
+<h2 style="margin: 0; font-family: Manrope, sans-serif; font-weight: 800; font-size: 38px; line-height: 1.15">Une seule application pour toute votre communication</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #4A5A4E">Sur le web, l'ordinateur et le mobile. Votre équipe reste joignable partout, avec le même numéro.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px">
+<div style="background: #F7F8F5; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d7a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Appels</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5A4E">Appelez et recevez vos appels sur tous vos appareils. Un appel refusé arrête la sonnerie partout.</p>
+</div>
+<div style="background: #F7F8F5; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d7a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Messagerie</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5A4E">Messages texte et messagerie vocale au même endroit, pour ne rien perdre.</p>
+</div>
+<div style="background: #F7F8F5; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d7a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"></rect><path d="M22 8l-6 4 6 4z"></path></svg>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Vidéoconférence</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5A4E">Réunions vidéo avec vos collègues et vos clients, sans outil supplémentaire.</p>
+</div>
+<div style="background: #F7F8F5; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
+<svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d7a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"></circle><path d="M2 21a7 7 0 0 1 14 0"></path><circle cx="19" cy="8" r="3"></circle></svg>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Présence d'équipe</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5A4E">Voyez en un coup d'œil qui est disponible ou occupé avant de transférer un appel.</p>
+</div>
+</div>
+</div>
+</section>
 
-            <!-- ══════════ SERVICES ══════════ -->
-            <section class="py-28 px-6 relative overflow-hidden">
-                <div class="orb" style="width:300px;height:300px;background:rgba(45,122,58,0.06);top:20%;right:-100px;filter:blur(100px)"></div>
-                
-                <div class="mx-auto max-w-7xl relative z-10">
-                    <div class="mb-16 max-w-2xl scroll-reveal">
-                        <span class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3 block">What We Offer</span>
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-5">
-                            Everything your business needs to <span class="bg-gradient-to-r from-accent to-accent-green bg-clip-text text-transparent">communicate smarter</span>
-                        </h2>
-                        <p class="text-lg text-slate-400 leading-relaxed">
-                            From AI receptionists to global VoIP — one platform, zero complexity.
-                        </p>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                        <!-- Card 1 -->
-                        <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7 flex flex-col">
-                            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                                <span class="material-symbols-outlined text-2xl">phone_in_talk</span>
-                            </div>
-                            <h4 class="mb-2 text-lg font-bold text-white">Cloud Phone Systems (BroadWorks)</h4>
-                            <p class="text-sm text-slate-400 leading-relaxed mb-5 flex-1">
-                                Enterprise cloud PBX powered by Cisco BroadWorks. Scalable, feature-rich hosted telephony for businesses of all sizes.
-                            </p>
-                            <a class="flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-3 transition-all" href="voip-solution.html">
-                                Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                            </a>
-                        </div>
+<!-- Sophie -->
+<section id="sophie" style="max-width: 1180px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+<div style="flex: 1 1 440px; min-width: 0; background: #17221A; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 13px; font-weight: 600; color: #9FD1A7; letter-spacing: 0.04em">CONVERSATION AVEC SOPHIE</span>
+<div style="align-self: flex-start; max-width: 85%; background: #26352A; color: #E8EFE9; padding: 14px 16px; border-radius: 14px; font-size: 15px; line-height: 1.5">Bonjour, vous êtes bien à la clinique. Je suis Sophie, comment puis-je vous aider ?</div>
+<div style="align-self: flex-end; max-width: 85%; background: #2d7a3a; color: #FFFFFF; padding: 14px 16px; border-radius: 14px; font-size: 15px; line-height: 1.5">J'aimerais prendre rendez-vous la semaine prochaine.</div>
+<div style="align-self: flex-start; max-width: 85%; background: #26352A; color: #E8EFE9; padding: 14px 16px; border-radius: 14px; font-size: 15px; line-height: 1.5">Bien sûr. J'ai mardi à 10 h ou jeudi à 14 h. Lequel vous convient ?</div>
+</div>
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<h2 style="margin: 0; font-family: Manrope, sans-serif; font-weight: 800; font-size: 38px; line-height: 1.15">Sophie, votre réceptionniste IA</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #4A5A4E">Un simple bouton, et Sophie prend le relais. Elle parle français et anglais, et travaille jour et nuit.</p>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 16px">
+<li style="display: flex; gap: 12px; align-items: flex-start"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2d7a3a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><path d="M20 6L9 17l-5-5"></path></svg>Répond à vos clients quand votre équipe est occupée</li>
+<li style="display: flex; gap: 12px; align-items: flex-start"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2d7a3a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><path d="M20 6L9 17l-5-5"></path></svg>Prend, déplace et confirme les rendez-vous</li>
+<li style="display: flex; gap: 12px; align-items: flex-start"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2d7a3a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><path d="M20 6L9 17l-5-5"></path></svg>Répond aux questions fréquentes : heures, adresse, services</li>
+<li style="display: flex; gap: 12px; align-items: flex-start"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2d7a3a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><path d="M20 6L9 17l-5-5"></path></svg>Fonctionne aussi avec votre système téléphonique actuel</li>
+</ul>
+</div>
+</section>
 
-                        <!-- Card 2 -->
-                        <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7 flex flex-col">
-                            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-accent-green/10 text-accent-green">
-                                <span class="material-symbols-outlined text-2xl">video_call</span>
-                            </div>
-                            <h4 class="mb-2 text-lg font-bold text-white">Cisco Webex Integration</h4>
-                            <p class="text-sm text-slate-400 leading-relaxed mb-5 flex-1">
-                                Seamless Cisco Webex integration for unified communications, video conferencing, and team collaboration — all in one platform.
-                            </p>
-                            <a class="flex items-center gap-1.5 text-sm font-semibold text-accent-green hover:gap-3 transition-all" href="voip-solution.html">
-                                Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                            </a>
-                        </div>
+<!-- Secteurs -->
+<section id="secteurs" style="background: #FFFFFF; border-top: 1px solid #E3E8E1; border-bottom: 1px solid #E3E8E1">
+<div style="max-width: 1180px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px">
+<h2 style="margin: 0; font-family: Manrope, sans-serif; font-weight: 800; font-size: 38px; line-height: 1.15">Pensé pour les entreprises d'ici</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px">
+<div style="border: 1px solid #E3E8E1; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Cliniques</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5A4E">Moins d'appels manqués à l'accueil, des rendez-vous pris même après les heures.</p>
+</div>
+<div style="border: 1px solid #E3E8E1; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Cabinets juridiques</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5A4E">Chaque nouveau client potentiel est accueilli et dirigé vers le bon professionnel.</p>
+</div>
+<div style="border: 1px solid #E3E8E1; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Bureaux professionnels</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5A4E">Comptables, courtiers, consultants : une image professionnelle à chaque appel.</p>
+</div>
+<div style="border: 1px solid #E3E8E1; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Petites entreprises</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5A4E">De 1 à 50 employés, prêt en quelques jours, sans matériel à installer.</p>
+</div>
+</div>
+</div>
+</section>
 
-                        <!-- Card 3 -->
-                        <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7 flex flex-col">
-                            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent">
-                                <span class="material-symbols-outlined text-2xl">auto_mode</span>
-                            </div>
-                            <h4 class="mb-2 text-lg font-bold text-white">AI Call Automation</h4>
-                            <p class="text-sm text-slate-400 leading-relaxed mb-5 flex-1">
-                                Automate inbound/outbound calls, transcriptions, CRM updates, and follow-ups — all powered by intelligent AI workflows.
-                            </p>
-                            <a class="flex items-center gap-1.5 text-sm font-semibold text-accent hover:gap-3 transition-all" href="ai-agent-solution.html">
-                                Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                            </a>
-                        </div>
+<!-- Pourquoi nous -->
+<section style="max-width: 1180px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 32px">
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Manrope, sans-serif; font-weight: 800; font-size: 22px; color: #2d7a3a">Entreprise québécoise</span>
+<span style="font-size: 15px; line-height: 1.6; color: #4A5A4E">Basée à Montréal, service en français et en anglais.</span>
+</div>
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Manrope, sans-serif; font-weight: 800; font-size: 22px; color: #2d7a3a">Données au Canada</span>
+<span style="font-size: 15px; line-height: 1.6; color: #4A5A4E">Vos appels et vos données hébergés à Montréal.</span>
+</div>
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Manrope, sans-serif; font-weight: 800; font-size: 22px; color: #2d7a3a">Mise en place guidée</span>
+<span style="font-size: 15px; line-height: 1.6; color: #4A5A4E">Nous configurons vos postes, votre menu d'accueil et Sophie avec vous.</span>
+</div>
+</section>
 
-                        <!-- Card 4 -->
-                        <div class="scroll-reveal card-lift rounded-xl border border-white/5 bg-surface-light p-7 flex flex-col">
-                            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                                <span class="material-symbols-outlined text-2xl">support_agent</span>
-                            </div>
-                            <h4 class="mb-2 text-lg font-bold text-white">Smart AI Receptionist</h4>
-                            <p class="text-sm text-slate-400 leading-relaxed mb-5 flex-1">
-                                24/7 AI-powered virtual receptionist that handles calls, books appointments, answers FAQs, and routes customers automatically.
-                            </p>
-                            <a class="flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-3 transition-all" href="ai-agent-solution.html">
-                                Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- Contact -->
+<section id="contact" style="background: #2d7a3a">
+<div style="max-width: 1180px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 18px; color: #FFFFFF">
+<h2 style="margin: 0; font-family: Manrope, sans-serif; font-weight: 800; font-size: 38px; line-height: 1.15">Voyez SIP-Voice en action</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #E4F1E6">Réservez une démo de 20 minutes. Nous vous montrons l'application et Sophie avec un exemple adapté à votre entreprise.</p>
+<div style="display: flex; flex-direction: column; gap: 8px; font-size: 16px; color: #FFFFFF">
+<span>+1 514-458-9062</span>
+<span>info@sipvoipai.com</span>
+</div>
+</div>
+<form style="flex: 1 1 440px; min-width: 0; background: #FFFFFF; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Nom<input type="text" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Entreprise<input type="text" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Courriel<input type="email" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Téléphone<input type="tel" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Secteur
+<select style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px; background: #FFFFFF">
+<option>Clinique</option>
+<option>Cabinet juridique</option>
+<option>Bureau professionnel</option>
+<option>Autre</option>
+</select>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Message (facultatif)<textarea rows="3" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px; resize: vertical"></textarea></label>
+<button type="button" style="font: inherit; font-weight: 600; font-size: 16px; background: #2d7a3a; color: #FFFFFF; border: none; padding: 16px; border-radius: 12px; cursor: pointer">Demander ma démo</button>
+</form>
+</div>
+</section>
 
-            <!-- ══════════ STATS BAND ══════════ -->
-            <section class="scroll-reveal py-16 px-6 border-y border-white/5 bg-surface-light/50">
-                <div class="mx-auto max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                    <div>
-                        <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">500<span class="text-primary">+</span></div>
-                        <div class="text-sm text-slate-500">Businesses Served</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">10<span class="text-accent">M+</span></div>
-                        <div class="text-sm text-slate-500">Calls Processed</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">99.99<span class="text-accent-green">%</span></div>
-                        <div class="text-sm text-slate-500">Uptime Guaranteed</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl md:text-4xl font-extrabold text-white mb-1">0.8<span class="text-primary">s</span></div>
-                        <div class="text-sm text-slate-500">Avg AI Response</div>
-                    </div>
-                </div>
-            </section>
+<!-- Pied de page -->
+<footer style="background: #17221A; color: #B8C5BB">
+<div style="max-width: 1180px; margin: 0 auto; padding: 32px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 14px">
+<span>© 2026 SIP-Voice inc. Montréal (Québec)</span>
+<div style="display: flex; flex-wrap: wrap; gap: 20px">
+<a href="#accueil" style="color: #B8C5BB">Confidentialité</a>
+<a href="#accueil" style="color: #B8C5BB">Conditions</a>
+<a href="911-notice.html" style="color: #B8C5BB">Avis 911</a>
+<a href="#accueil" style="color: #B8C5BB">English</a>
+</div>
+</div>
+</footer>
 
-            <!-- ══════════ CTA ══════════ -->
-            <section class="scroll-reveal py-28 px-6">
-                <div class="mx-auto max-w-4xl rounded-3xl border border-primary/15 bg-gradient-to-br from-primary/8 via-surface-light to-accent-green/5 p-12 md:p-20 text-center relative overflow-hidden">
-                    <div class="absolute inset-0 grid-pattern opacity-30"></div>
-                    <div class="relative z-10">
-                        <h2 class="mb-5 text-3xl md:text-5xl font-extrabold text-white">Ready to upgrade your comms?</h2>
-                        <p class="mx-auto mb-10 max-w-lg text-lg text-slate-400">
-                            Discover how SipvoipAI can transform your business communications. Let's talk.
-                        </p>
-                        <div class="flex flex-col sm:flex-row justify-center gap-4">
-                            <a href="contact.html" class="btn-glow rounded-xl bg-primary px-10 py-4 text-base font-bold text-white">
-                                Book a Demo
-                            </a>
-                            <a href="contact.html" class="rounded-xl border border-white/10 bg-white/5 px-10 py-4 text-base font-bold text-slate-200 hover:bg-white/10 transition-all">
-                                Talk to Sales
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- ══════════ FOOTER ══════════ -->
-        <footer class="border-t border-white/5 bg-surface px-6 py-14">
-            <div class="mx-auto max-w-7xl">
-                <div class="grid grid-cols-2 gap-12 md:grid-cols-4 lg:grid-cols-5">
-                    <div class="col-span-2 lg:col-span-1">
-                        <div class="mb-5 flex items-center gap-2">
-                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent">
-                                <span class="material-symbols-outlined text-white text-lg" style="font-variation-settings:'FILL' 1">cell_tower</span>
-                            </div>
-                            <span class="text-base font-bold text-white">Sip<span class="text-primary">voip</span><span class="text-accent">AI</span></span>
-                        </div>
-                        <p class="text-sm leading-relaxed text-slate-500 mb-1">
-                            AI-Powered Business Communication Systems
-                        </p>
-                        <p class="text-xs text-slate-600">Digital Communication Experts</p>
-                    </div>
-                    <div>
-                        <h5 class="mb-4 text-sm font-bold text-white">Solutions</h5>
-                        <ul class="space-y-2.5 text-sm text-slate-500">
-                            <li><a class="hover:text-primary transition-colors" href="voip-solution.html">VoIP Solution</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="ai-agent-solution.html">AI Agent Solution</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="contact-center-solution.html">Contact Center</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="website-creation-solution.html">Website Creation</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="#">API Docs</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5 class="mb-4 text-sm font-bold text-white">Company</h5>
-                        <ul class="space-y-2.5 text-sm text-slate-500">
-                            <li><a class="hover:text-primary transition-colors" href="#">About</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="contact.html">Contact</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5 class="mb-4 text-sm font-bold text-white">Contact</h5>
-                        <ul class="space-y-2.5 text-sm text-slate-500">
-                            <li><a class="hover:text-primary transition-colors" href="mailto:info@sipvoipai.com">info@sipvoipai.com</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="tel:+15144589062">+1 514-458-9062</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="tel:+14386096257">+1 438 609 6257</a></li>
-                            <li><span>Montreal, Canada</span></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5 class="mb-4 text-sm font-bold text-white">Legal</h5>
-                        <ul class="space-y-2.5 text-sm text-slate-500">
-                            <li><a class="hover:text-primary transition-colors" href="#">Privacy</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="#">Terms</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="#">Security</a></li>
-                            <li><a class="hover:text-primary transition-colors" href="911-notice.html">911 Notice</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mt-14 border-t border-white/5 pt-8 space-y-2 text-center">
-                    <p class="text-xs text-slate-500">Powered by Cisco BroadWorks &amp; Uboss Platform</p>
-                    <p class="text-xs text-slate-600">© 2025 SipvoipAI Inc. All rights reserved.</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-    
-    <!-- ElevenLabs AI Voice Agent Widget -->
-    <elevenlabs-convai agent-id="agent_0001khqe7s3hfka9c4fqfpx7ffvv"></elevenlabs-convai>
-    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
-    
-    <!-- Mobile Solutions Accordion Toggle -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggle = document.getElementById('mobile-solutions-toggle');
-            const list = document.getElementById('mobile-solutions-list');
-            const arrow = document.getElementById('mobile-solutions-arrow');
-            if (toggle && list) {
-                toggle.addEventListener('click', function() {
-                    list.classList.toggle('open');
-                    if (arrow) arrow.style.transform = list.classList.contains('open') ? 'rotate(180deg)' : '';
-                });
-            }
-        });
-    </script>
-    
-    <script src="assets/js/main.js"></script>
+</div>
 </body>
 </html>
