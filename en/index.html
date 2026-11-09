@@ -182,12 +182,12 @@ a{color:#2d7a3a}a:hover{color:#1f5a29}
 </div>
 <form id="demo-form" style="flex: 1 1 440px; min-width: 0; background: #FFFFFF; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
-<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Name<input id="f-name" type="text" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Name *<input id="f-name" type="text" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
 <label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Company<input id="f-company" type="text" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
-<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Email<input id="f-email" type="email" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
-<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Phone<input id="f-phone" type="tel" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Email *<input id="f-email" type="email" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Phone *<input id="f-phone" type="tel" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
 </div>
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Industry
 <select id="f-industry" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px; background: #FFFFFF">
@@ -198,18 +198,51 @@ a{color:#2d7a3a}a:hover{color:#1f5a29}
 </select>
 </label>
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Message (optional)<textarea id="f-message" rows="3" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px; resize: vertical"></textarea></label>
-<button type="button" onclick="requestDemo()" style="font: inherit; font-weight: 600; font-size: 16px; background: #2d7a3a; color: #FFFFFF; border: none; padding: 16px; border-radius: 12px; cursor: pointer">Request my demo</button>
+<input id="f-website" type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+<div id="form-msg" style="display:none; padding: 12px 16px; border-radius: 10px; font-size: 14px; font-weight: 500"></div>
+<button id="demo-btn" type="button" onclick="requestDemo()" style="font: inherit; font-weight: 600; font-size: 16px; background: #2d7a3a; color: #FFFFFF; border: none; padding: 16px; border-radius: 12px; cursor: pointer">Request my demo</button>
 </form>
 <script>
-function requestDemo() {
-  var name = document.getElementById('f-name').value;
-  var company = document.getElementById('f-company').value;
-  var email = document.getElementById('f-email').value;
-  var phone = document.getElementById('f-phone').value;
-  var industry = document.getElementById('f-industry').value;
-  var message = document.getElementById('f-message').value;
-  var body = 'Name: ' + name + '\r\nCompany: ' + company + '\r\nEmail: ' + email + '\r\nPhone: ' + phone + '\r\nIndustry: ' + industry + (message ? '\r\nMessage: ' + message : '');
-  window.location.href = 'mailto:info@sipvoipai.com?subject=' + encodeURIComponent('SIP-Voice demo request') + '&body=' + encodeURIComponent(body);
+async function requestDemo() {
+  var name = document.getElementById('f-name').value.trim();
+  var email = document.getElementById('f-email').value.trim();
+  var phone = document.getElementById('f-phone').value.trim();
+  if (!name || !email || !phone) {
+    showMsg('Please fill in Name, Email and Phone.', '#7a2d2d', '#fdf0f0');
+    return;
+  }
+  var btn = document.getElementById('demo-btn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    var resp = await fetch('https://n8n.siplink-agents.com/webhook/sipvoipai-demo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        company: document.getElementById('f-company').value.trim(),
+        email: email,
+        phone: phone,
+        industry: document.getElementById('f-industry').value,
+        message: document.getElementById('f-message').value.trim(),
+        langue: 'en',
+        website: document.getElementById('f-website').value
+      })
+    });
+    if (resp.ok) {
+      showMsg('Thank you! We will contact you within 24 hours.', '#1f5a29', '#f0fdf4');
+      document.getElementById('demo-form').reset();
+    } else {
+      throw new Error('server');
+    }
+  } catch(e) {
+    showMsg('Something went wrong. Please email us at <a href="mailto:info@sipvoipai.com" style="color:#7a2d2d">info@sipvoipai.com</a>.', '#7a2d2d', '#fdf0f0');
+  }
+  btn.disabled = false; btn.textContent = 'Request my demo';
+}
+function showMsg(html, color, bg) {
+  var el = document.getElementById('form-msg');
+  el.innerHTML = html; el.style.color = color; el.style.background = bg;
+  el.style.display = 'block';
 }
 </script>
 </div>

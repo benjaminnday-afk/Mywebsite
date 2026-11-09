@@ -182,12 +182,12 @@ a{color:#2d7a3a}a:hover{color:#1f5a29}
 </div>
 <form id="demo-form" style="flex: 1 1 440px; min-width: 0; background: #FFFFFF; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
-<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Nom<input id="f-nom" type="text" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Nom *<input id="f-nom" type="text" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
 <label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Entreprise<input id="f-entreprise" type="text" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
-<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Courriel<input id="f-courriel" type="email" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
-<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Téléphone<input id="f-telephone" type="tel" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Courriel *<input id="f-courriel" type="email" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Téléphone *<input id="f-telephone" type="tel" required style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
 </div>
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Secteur
 <select id="f-secteur" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px; background: #FFFFFF">
@@ -198,18 +198,51 @@ a{color:#2d7a3a}a:hover{color:#1f5a29}
 </select>
 </label>
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Message (facultatif)<textarea id="f-message" rows="3" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px; resize: vertical"></textarea></label>
-<button type="button" onclick="envoyerDemo()" style="font: inherit; font-weight: 600; font-size: 16px; background: #2d7a3a; color: #FFFFFF; border: none; padding: 16px; border-radius: 12px; cursor: pointer">Demander ma démo</button>
+<input id="f-website" type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+<div id="form-msg" style="display:none; padding: 12px 16px; border-radius: 10px; font-size: 14px; font-weight: 500"></div>
+<button id="demo-btn" type="button" onclick="envoyerDemo()" style="font: inherit; font-weight: 600; font-size: 16px; background: #2d7a3a; color: #FFFFFF; border: none; padding: 16px; border-radius: 12px; cursor: pointer">Demander ma démo</button>
 </form>
 <script>
-function envoyerDemo() {
-  var nom = document.getElementById('f-nom').value;
-  var entreprise = document.getElementById('f-entreprise').value;
-  var courriel = document.getElementById('f-courriel').value;
-  var telephone = document.getElementById('f-telephone').value;
-  var secteur = document.getElementById('f-secteur').value;
-  var message = document.getElementById('f-message').value;
-  var corps = 'Nom : ' + nom + '\r\nEntreprise : ' + entreprise + '\r\nCourriel : ' + courriel + '\r\nTéléphone : ' + telephone + '\r\nSecteur : ' + secteur + (message ? '\r\nMessage : ' + message : '');
-  window.location.href = 'mailto:info@sipvoipai.com?subject=' + encodeURIComponent('Demande de démo SIP-Voice') + '&body=' + encodeURIComponent(corps);
+async function envoyerDemo() {
+  var nom = document.getElementById('f-nom').value.trim();
+  var courriel = document.getElementById('f-courriel').value.trim();
+  var telephone = document.getElementById('f-telephone').value.trim();
+  if (!nom || !courriel || !telephone) {
+    afficherMsg('Veuillez remplir les champs Nom, Courriel et Téléphone.', '#7a2d2d', '#fdf0f0');
+    return;
+  }
+  var btn = document.getElementById('demo-btn');
+  btn.disabled = true; btn.textContent = 'Envoi en cours…';
+  try {
+    var resp = await fetch('https://n8n.siplink-agents.com/webhook/sipvoipai-demo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nom: nom,
+        entreprise: document.getElementById('f-entreprise').value.trim(),
+        courriel: courriel,
+        telephone: telephone,
+        secteur: document.getElementById('f-secteur').value,
+        message: document.getElementById('f-message').value.trim(),
+        langue: 'fr',
+        website: document.getElementById('f-website').value
+      })
+    });
+    if (resp.ok) {
+      afficherMsg('Merci ! Nous vous contacterons sous 24 heures.', '#1f5a29', '#f0fdf4');
+      document.getElementById('demo-form').reset();
+    } else {
+      throw new Error('server');
+    }
+  } catch(e) {
+    afficherMsg('Une erreur est survenue. Écrivez-nous à <a href="mailto:info@sipvoipai.com" style="color:#7a2d2d">info@sipvoipai.com</a>.', '#7a2d2d', '#fdf0f0');
+  }
+  btn.disabled = false; btn.textContent = 'Demander ma démo';
+}
+function afficherMsg(html, color, bg) {
+  var el = document.getElementById('form-msg');
+  el.innerHTML = html; el.style.color = color; el.style.background = bg;
+  el.style.display = 'block';
 }
 </script>
 </div>
