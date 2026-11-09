@@ -179,26 +179,38 @@ a{color:#2d7a3a}a:hover{color:#1f5a29}
 <span>info@sipvoipai.com</span>
 </div>
 </div>
-<form style="flex: 1 1 440px; min-width: 0; background: #FFFFFF; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<form id="demo-form" style="flex: 1 1 440px; min-width: 0; background: #FFFFFF; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
-<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Nom<input type="text" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
-<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Entreprise<input type="text" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Nom<input id="f-nom" type="text" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Entreprise<input id="f-entreprise" type="text" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
-<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Courriel<input type="email" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
-<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Téléphone<input type="tel" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Courriel<input id="f-courriel" type="email" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
+<label style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Téléphone<input id="f-telephone" type="tel" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px"></label>
 </div>
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Secteur
-<select style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px; background: #FFFFFF">
+<select id="f-secteur" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px; background: #FFFFFF">
 <option>Clinique</option>
 <option>Cabinet juridique</option>
 <option>Bureau professionnel</option>
 <option>Autre</option>
 </select>
 </label>
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Message (facultatif)<textarea rows="3" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px; resize: vertical"></textarea></label>
-<button type="button" style="font: inherit; font-weight: 600; font-size: 16px; background: #2d7a3a; color: #FFFFFF; border: none; padding: 16px; border-radius: 12px; cursor: pointer">Demander ma démo</button>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600">Message (facultatif)<textarea id="f-message" rows="3" style="font: inherit; font-weight: 400; padding: 12px; border: 1px solid #B9C4B6; border-radius: 10px; resize: vertical"></textarea></label>
+<button type="button" onclick="envoyerDemo()" style="font: inherit; font-weight: 600; font-size: 16px; background: #2d7a3a; color: #FFFFFF; border: none; padding: 16px; border-radius: 12px; cursor: pointer">Demander ma démo</button>
 </form>
+<script>
+function envoyerDemo() {
+  var nom = document.getElementById('f-nom').value;
+  var entreprise = document.getElementById('f-entreprise').value;
+  var courriel = document.getElementById('f-courriel').value;
+  var telephone = document.getElementById('f-telephone').value;
+  var secteur = document.getElementById('f-secteur').value;
+  var message = document.getElementById('f-message').value;
+  var corps = 'Nom : ' + nom + '\r\nEntreprise : ' + entreprise + '\r\nCourriel : ' + courriel + '\r\nTéléphone : ' + telephone + '\r\nSecteur : ' + secteur + (message ? '\r\nMessage : ' + message : '');
+  window.location.href = 'mailto:info@sipvoipai.com?subject=' + encodeURIComponent('Demande de démo SIP-Voice') + '&body=' + encodeURIComponent(corps);
+}
+</script>
 </div>
 </section>
 
